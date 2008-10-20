@@ -2,9 +2,9 @@
 /**
  * Base class for lexers
  */
-class AntlrLexer extends BaseRecognizer{
+abstract class AntlrLexer extends BaseRecognizer{
 	public static $DEFAULT_TOKEN_CHANNEL = 0;
-	
+	protected $input;
 	
 	public function __construct($input, $state=null) {
 		if($state==null){
@@ -14,7 +14,28 @@ class AntlrLexer extends BaseRecognizer{
 		$this->input = $input;
 	}
 	
+	public function reset() {
+		parent::reset(); // reset all recognizer state variables
+		// wack Lexer state variables
+		if ( $this->input!=null ) {
+			$this->input->seek(0); // rewind the input
+		}
+		if ( $this->state==null ) {
+			return; // no shared state work to do
+		}
+		$this->state->token = null;
+		$this->state->type = TokenConst::$INVALID_TOKEN_TYPE;
+		$this->state->channel = TokenConst::$DEFAULT_CHANNEL;
+		$this->state->tokenStartCharIndex = -1;
+		$this->state->tokenStartCharPositionInLine = -1;
+		$this->state->tokenStartLine = -1;
+		$this->state->text = null;
+	}
 	
+	
+	/** Return a token from this source; i.e., match a token on the char
+	 *  stream.
+	 */
 	public function nextToken() {
 		while (true) {
 			$this->state->token = null;
@@ -24,7 +45,7 @@ class AntlrLexer extends BaseRecognizer{
 			$this->state->tokenStartLine = $this->input->getLine();
 			$this->state->text = null;
 			if ( $this->input->LA(1)==CharStreamConst::$EOF ) {
-				return $Token_EOF_TOKEN;
+				return TokenConst::$EOF_TOKEN;
 			}
 			try {
 				$this->mTokens();
@@ -45,6 +66,30 @@ class AntlrLexer extends BaseRecognizer{
 				// match() routine has already called recover()
 			}
 		}
+	}
+	
+	/** Instruct the lexer to skip creating a token for current lexer rule
+	 *  and look for another token.  nextToken() knows to keep looking when
+	 *  a lexer rule finishes with token set to SKIP_TOKEN.  Recall that
+	 *  if token==null at end of any token rule, it creates one for you
+	 *  and emits it.
+	 */
+	public function skip() {
+		$this->state->token = TokenConst::$SKIP_TOKEN;
+	}
+
+	/** This is the lexer entry point that sets instance var 'token' */
+	public abstract function mTokens();
+
+	/** Set the char stream and reset the lexer */
+	public function setCharStream($input) {
+		$this->input = null;
+		$this->reset();
+		$this->input = $input;
+	}
+
+	public function getCharStream() {
+		return $this->input;
 	}
 	
 	public function getSourceName() {
@@ -127,11 +172,36 @@ class AntlrLexer extends BaseRecognizer{
 		$this->state->failed = false;
 	}
 	
+	public function getLine() {
+		return $this->input->getLine();
+	}
+
+	public function getCharPositionInLine() {
+		return $this->input->getCharPositionInLine();
+	}
+	
 	/** What is the index of the current character of lookahead? */
 	public function getCharIndex() {
 		return $this->input->index();
 	}
 	
+
+	/** Return the text matched so far for the current token or any
+	 *  text override.
+	 */
+	public function getText() {
+		if ( $this->state->text!=null ) {
+			return $this->state->text;
+		}
+		return $this->input->substring($this->state->tokenStartCharIndex,$this->getCharIndex()-1);
+	}
+
+	/** Set the complete text of this token; it wipes any previous
+	 *  changes to the text.
+	 */
+	public function setText($text) {
+		$this->state->text = $text;
+	}
 	
 	public function reportError($e) {
 		/** TODO: not thought about recovery in lexer yet.
@@ -199,7 +269,7 @@ class AntlrLexer extends BaseRecognizer{
 				$s = "\\r";
 				break;
 		}
-		if ($c==$Token_EOF){
+		if ($c==TokenConst::$EOF){
 			$s = "<EOF>";
 		}
 		return "'"+s+"'";
@@ -212,6 +282,17 @@ class AntlrLexer extends BaseRecognizer{
 	 */
 	public function recover($re) {
 		$this->input->consume();
+	}
+	
+	
+	public function traceIn($ruleName, $ruleIndex)  {
+		$inputSymbol = $this->input->LT(1)." line=".$this->getLine().":".$this->getCharPositionInLine();
+		parent::traceIn($ruleName, $ruleIndex, $inputSymbol);
+	}
+
+	public function traceOut($ruleName, $ruleIndex)  {
+		$inputSymbol = $this->input->LT(1)." line=".$this->getLine().":".$this->getCharPositionInLine();
+		parent::traceOut($ruleName, $ruleIndex, $inputSymbol);
 	}
 }
 

@@ -10,36 +10,51 @@ class ParserTest015 extends PHPUnit_Framework_TestCase{
 	
 	protected function tearDown(){
 	}
+    
 
-	function evaluate($expr){
+
+
+	function testValid01(){
+		$this->evaluate("1 + 2", 3);
+	}
+
+	function testValid02(){
+		$this->evaluate("1 + 2 * 3", 7);
+	}
+
+    function testValid03(){
+        $this->evaluate("10 / 2", 5);
+	}
+
+	function testValid04(){
+		$this->evaluate("6 + 2*(3+1) - 4", 10);
+	}
+
+	function testMalformedInput(){
+		$this->evaluate("6 - (2*1", 4, array("mismatched token at pos 8"));
+	}
+
+	function evaluate($expr, $expected, $errors=array()){
+		$parser = $this->parser($expr);
+		$result = $parser->evaluate();
+		self::assertEquals($result, $expected);
+        self::assertTrue(sizeof($parser->reportedErrors) == sizeof($errors));
+	}
+	
+	function parser($expr){
 		$ass = new ANTLRStringStream($expr);
 		$lex = new t015calcLexer($ass);
 		$cts = new CommonTokenStream($lex);
 		$tap = new t015calcParser($cts);
-		return $tap->expression();
-		
+		return $tap;
 	}
 	
-	
-	public function testValid01(){
-        self::assertEquals($this->evaluate("1 + 2"), 3);
+	function readFile($filename){
+		$handle = fopen($filename, "r");
+		$contents = fread($handle, filesize($filename));
+		fclose($handle);
+		return $contents;
 	}
-	
-	public function testValid02(){
-        self::assertEquals($this->evaluate("1 + 2 * 3"), 7);
-	}
-
-	public function testValid03(){
-        self::assertEquals($this->evaluate("10 / 2"), 5);
-	}
-	public function testValid04(){
-        self::assertEquals($this->evaluate("6 + 2*(3+1) - 4"), 10);
-	}
-
-    function testMalformedInput(){
-        $this->evaluate("6 - (2*1");
-	}
-	
 }
 
 ?>

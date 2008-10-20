@@ -83,8 +83,7 @@ class DFA {
 	public function _predict($input) {
 		$s = 0; // we always start at s0
 			while ( true ) {
-				if ( $this->debug ) echo ("DFA ".$this->decisionNumber." state ".$s." LA(1)=".$input->LA(1)."(".$input->LA(1)+
-												"), index=".$input->index());
+				if ( $this->debug ) echo ("DFA ".$this->decisionNumber." state ".$s." LA(1)=".$input->LA(1)."(".$input->LA(1)."), index=".$input->index());
 				$specialState = $this->special[$s];
 				if ( $specialState>=0 ) {
 					if ( $this->debug ) {

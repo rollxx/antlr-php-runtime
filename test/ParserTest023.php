@@ -2,29 +2,24 @@
 
 require 'PHPUnit/Framework.php';
 require "antlr.php";
-require "t013parserLexer.php";
-require "t013parserParser.php";
-class ParserTest013 extends PHPUnit_Framework_TestCase{
+require "t023scopesLexer.php";
+require "t023scopesParser.php";
+class ParserTest023 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
 	
 	protected function tearDown(){
 	}
     
-	function test1(){
-		
-			$parser = $this->parser('foobar');
-			$parser->document();
-
-	        self::assertTrue(sizeof($parser->reportedErrors) == 0);
-	        self::assertEquals($parser->identifiers, array('foobar'));
+    function testValid1(){
+		$parser = $this->parser('foobar');
+        $parser->prog();
 	}
-
 	function parser($expr){
 		$ass = new ANTLRStringStream($expr);
-		$lex = new t013parserLexer($ass);
+		$lex = new t023scopesLexer($ass);
 		$cts = new CommonTokenStream($lex);
-		$tap = new t013parserParser($cts);
+		$tap = new t023scopesParser($cts);
 		return $tap;
 	}
 	

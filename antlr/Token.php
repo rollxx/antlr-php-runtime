@@ -182,37 +182,36 @@
 		}
 	}
 	
-	$Token_DEFAULT_CHANNEL=0;
-	$Token_INVALID_TOKEN_TYPE=0;
-	$Token_EOF=CharStreamConst::$EOF;
-	$Token_EOF_TOKEN=CommonToken::forType($Token_EOF);
-	
-	$Token_INVALID_TOKEN_TYPE = 0;
-	$Token_INVALID_TOKEN = CommonToken::forType($Token_INVALID_TOKEN_TYPE);
+	TokenConst::$DEFAULT_CHANNEL=0;
+	TokenConst::$INVALID_TOKEN_TYPE=0;
 
+	TokenConst::$EOF = CharStreamConst::$EOF;
+	TokenConst::$EOF_TOKEN = CommonToken::forType(TokenConst::$EOF);
+	
+	TokenConst::$INVALID_TOKEN_TYPE = 0;
+	TokenConst::$INVALID_TOKEN = CommonToken::forType(TokenConst::$INVALID_TOKEN_TYPE);
 	/** In an action, a lexer rule can set token to this SKIP_TOKEN and ANTLR
 	 *  will avoid creating a token for this symbol and try to fetch another.
 	 */
-	$Token_SKIP_TOKEN = CommonToken::forType($Token_INVALID_TOKEN_TYPE);
-
+	TokenConst::$SKIP_TOKEN = CommonToken::forType(TokenConst::$INVALID_TOKEN_TYPE);
+	
 	/** All tokens go to the parser (unless skip() is called in that rule)
 	 *  on a particular "channel".  The parser tunes to a particular channel
 	 *  so that whitespace etc... can go to the parser on a "hidden" channel.
 	 */
-	$Token_DEFAULT_CHANNEL = 0;
+	TokenConst::$DEFAULT_CHANNEL = 0;
 	
 	/** Anything on different channel than DEFAULT_CHANNEL is not parsed
 	 *  by parser.
 	 */
-	$Token_HIDDEN_CHANNEL = 99;
+	TokenConst::$HIDDEN_CHANNEL = 99;
 	
 	
 	
 	TokenConst::$MIN_TOKEN_TYPE = TokenConst::$UP+1;
-	TokenConst::$EOF = CharStreamConst::$EOF;
-	TokenConst::$EOF_TOKEN = CommonToken::forType(TokenConst::$EOF);
-	TokenConst::$INVALID_TOKEN = CommonToken::forType(TokenConst::$INVALID_TOKEN_TYPE);
-	TokenConst::$SKIP_TOKEN = CommonToken::forType(TokenConst::$INVALID_TOKEN_TYPE);
+
+
+
 	
 	
 ?>
