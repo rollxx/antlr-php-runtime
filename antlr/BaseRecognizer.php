@@ -188,7 +188,7 @@ abstract class BaseRecognizer{
 		if ( $e instanceof UnwantedTokenException ) {
 			$ute = $e;
 			$tokenName="<unknown>";
-			if ( $ute->expecting== $Token_EOF ) {
+			if ( $ute->expecting== TokenConst::$EOF ) {
 				$tokenName = "EOF";
 			}
 			else {
@@ -200,7 +200,7 @@ abstract class BaseRecognizer{
 		else if ( $e instanceof MissingTokenException ) {
 			$mte = $e;
 			$tokenName="<unknown>";
-			if ( $mte->expecting== $Token_EOF ) {
+			if ( $mte->expecting== TokenConst::$EOF ) {
 				$tokenName = "EOF";
 			}
 			else {
@@ -211,7 +211,7 @@ abstract class BaseRecognizer{
 		else if ( $e instanceof MismatchedTokenException ) {
 			$mte = $e;
 			$tokenName="<unknown>";
-			if ( $mte->expecting== $Token_EOF ) {
+			if ( $mte->expecting== TokenConst::$EOF ) {
 				$tokenName = "EOF";
 			}
 			else {
@@ -223,7 +223,7 @@ abstract class BaseRecognizer{
 		else if ( $e instanceof MismatchedTreeNodeException ) {
 			$mtne = $e;
 			$tokenName="<unknown>";
-			if ( $mtne->expecting==$Token_EOF ) {
+			if ( $mtne->expecting==TokenConst::$EOF ) {
 				$tokenName = "EOF";
 			}
 			else {
@@ -550,6 +550,7 @@ abstract class BaseRecognizer{
 	{
 		$e = null;
 		// if next token is what we are looking for then "delete" this token
+
 		if ( $this->mismatchIsUnwantedToken($input, $ttype) ) {
 			$e = new UnwantedTokenException($ttype, $input);
 			/*

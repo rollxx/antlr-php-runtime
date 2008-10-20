@@ -92,12 +92,12 @@
 			$state->p = $this->p;
 			$state->line = $this->line;
 			$state->charPositionInLine = $this->charPositionInLine;
-			$lastMarker = $this->markDepth;
+			$this->lastMarker = $this->markDepth;
 			return $this->markDepth;
 	    }
 
 	    public function rewind($m=null) {
-			if($m==null){
+			if($m===null){
 				$this->rewind((int)$this->lastMarker);
 			}else{
 				$state = $this->markers[$m];

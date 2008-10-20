@@ -2,33 +2,27 @@
 
 require 'PHPUnit/Framework.php';
 require "antlr.php";
-require "t012lexerXMLLexer.php";
-class LexerTest012 extends PHPUnit_Framework_TestCase{
+require "t019lexer.php";
+class LexerTest011 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
 	
 	protected function tearDown(){
 	}
 	
-	
-	
 	public function test1(){
-		$input = $this->readFile('test/t012lexerXML.input');
-		$result = $this->readFile('test/t012lexerXML.output');
-		$lexer = $this->lexer($input);
+		$input = $this->readFile('test/t019lexer.input');
+		$ass = new ANTLRStringStream($input);
+		$lexer = new t019lexer($ass);
 		while(true){
             $token = $lexer->nextToken();
             if ($token->type == TokenConst::$EOF){
                 break;
 			}
-		}
-		echo self::assertEquals($lexer->buf, $result);
-	}
-	
-	function lexer($input){
-		$ass = new ANTLRStringStream($input);
-		$lexer = new t012lexerXMLLexer($ass);
-		return $lexer;
+		}		
+		echo $count;
+		//$lexer->nextToken();
+		//echo self::assertEquals($lexer->buf, $output);
 	}
 	
 	function readFile($filename){
