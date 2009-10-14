@@ -1,6 +1,7 @@
 
 - Php.stg: translate specialStateTransition from Java to Php
            to reproduce run phpunit Lexer012Test.php
+  Remark: it appears that ANTLRv3 is not able to parse this grammar properly
 
 
 
