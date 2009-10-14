@@ -6,7 +6,7 @@ abstract class AntlrLexer extends BaseRecognizer{
 	public static $DEFAULT_TOKEN_CHANNEL = 0;
 	protected $input;
 	
-	public function __construct($input, $state=null) {
+	public function __construct($input, &$state=null) {
 		if($state==null){
 			$state = new RecognizerSharedState();
 		}
@@ -116,7 +116,7 @@ abstract class AntlrLexer extends BaseRecognizer{
 				$this->state->tokenStartCharIndex, $this->getCharIndex()-1);
 			$token->setLine($this->state->tokenStartLine);
 			$token->setText($this->state->text);
-			$token->setCharPositionInLine($this->state->tokenStartCharPositionInLine);
+			$token->setCharPositionInLine($this->state->tokenStartCharPositionInLine);			
 		}
 		$this->state->token = $token;
 		return $token;
@@ -144,7 +144,7 @@ abstract class AntlrLexer extends BaseRecognizer{
 		$this->input->consume();
 	}
 	
-	public function matchChar($c) {
+	public function matchChar($c) {		
 		if ($this->input->LA(1)!=$c ) {
 			if ( $this->state->backtracking>0 ) {
 				$this->state->failed = true;

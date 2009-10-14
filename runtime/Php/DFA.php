@@ -70,12 +70,11 @@ class DFA {
 		if (!is_object($input))
 			throw new Exception("input is not an object");
 		if ( $this->debug ) {
-			echo ("Enter DFA.predict for decision ".$this->decisionNumber);
+			echo "Enter DFA.predict for decision ".$this->decisionNumber."\n";
 		}
 		$mark = $input->mark(); // remember where decision started in input
 		try {
-			$ret = $this->_predict($input);
-			
+			$ret = $this->_predict($input);			
 		}
 		catch(Exception $e) {
 			$input->rewind($mark);
@@ -88,17 +87,15 @@ class DFA {
 	public function _predict($input) {
 		$s = 0; // we always start at s0
 			while ( true ) {
-				if ( $this->debug ) echo ("DFA ".$this->decisionNumber." state ".$s." LA(1)=".$input->LA(1)."(".$input->LA(1)."), index=".$input->index());
+				if ( $this->debug ) echo "DFA ".$this->decisionNumber." state ".$s." LA(1)=".$input->LA(1)."(".chr($input->LA(1))."), index=".$input->index()."\n";
 				$specialState = $this->special[$s];
 				if ( $specialState>=0 ) {
 					if ( $this->debug ) {
-						echo ("DFA ".$this->decisionNumber.
-							" state ".$s." is special state ".$specialState);
+						echo "DFA ".$this->decisionNumber." state ".$s." is special state ".$specialState."\n";
 					}
 					$s = $this->specialStateTransition($specialState, $input);
 					if ( $this->debug ) {
-						echo ("DFA ".$this->decisionNumber.
-							" returns from special state ".$specialState." to ".s);
+						echo "DFA ".$this->decisionNumber." returns from special state ".$specialState." to ".$s."\n";
 					}
 					if ( $s==-1 ) {
 						$this->noViableAlt($s, $input);
@@ -109,7 +106,7 @@ class DFA {
 				}
 				
 				if ( $this->accept[$s] >= 1 ) {
-					if ( $this->debug ) echo ("accept; predict "+$this->accept[$s]+" from state "+$this->s);
+					if ( $this->debug ) echo "accept; predict ".$this->accept[$s]." from state ".$s."\n";
 					return $this->accept[$s];
 				}
 				// look for a normal char transition
@@ -122,7 +119,7 @@ class DFA {
 						// eot[s]>=0 indicates that an EOT edge goes to another
 						// state.
 						if ( $this->eot[$s]>=0 ) {  // EOT Transition to accept state?
-							if ( $this->debug ) echo("EOT transition");
+							if ( $this->debug ) echo "EOT transition\n";
 							$s = $this->eot[$s];
 							$input->consume();
 							// TODO: I had this as return accept[eot[s]]
@@ -140,13 +137,13 @@ class DFA {
 					continue;
 				}
 				if ( $this->eot[$s]>=0 ) {  // EOT Transition?
-					if ( $this->debug ) println("EOT transition");
+					if ( $this->debug ) echo "EOT transition\n";
 					$s = $this->eot[$s];
 					$input->consume();
 					continue;
 				}
 				if ( $c==TokenConst::$EOF && $this->eof[$s]>=0 ) {  // EOF Transition to accept state?
-					if ( $this->debug ) echo ("accept via EOF; predict "+$this->accept[$this->eof[$s]]+" from "+$this->eof[$s]);
+					if ( $this->debug ) echo "accept via EOF; predict ".$this->accept[$this->eof[$s]]." from ".$this->eof[$s]."\n";
 					return $this->accept[$this->eof[$s]];
 				}
 				// not in range and not EOF/EOT, must be invalid symbol

@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 Simple.g 2009-04-27 18:10:17
+// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 Simple.g 2009-04-27 21:20:21
 
 
 # for convenience in actions
@@ -66,12 +66,9 @@ class SimpleParser extends AntlrParser {
         try {
             // Simple.g:10:6: ( 'program' ID ';' ( decl )+ ) 
             // Simple.g:10:8: 'program' ID ';' ( decl )+ 
-	    {
-
-		    $this->match($this->input,$this->getToken('13'),self::$FOLLOW_13_in_file32); 
-		    var_dump($this->input->data);
-		    $ID1=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_file34); 
-		echo "yo!\n";
+            {
+            $this->match($this->input,$this->getToken('13'),self::$FOLLOW_13_in_file32); 
+            $ID1=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_file34); 
             $this->match($this->input,$this->getToken('14'),self::$FOLLOW_14_in_file36); 
               System.out.println("found program "+($ID1!=null?$ID1->getText():null));
             // Simple.g:11:8: ( decl )+ 

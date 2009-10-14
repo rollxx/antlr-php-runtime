@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 18:10:16
+// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 21:20:20
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
@@ -696,4 +696,5 @@ class CommonLexer extends AntlrLexer {
 
 
 }
+
 ?>

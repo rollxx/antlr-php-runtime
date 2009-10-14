@@ -1,0 +1,9 @@
+v0.0.1
+
++ lexer is working in case of examples/import (compared to java version)
+
+- fixed: CommonToken setCharPositionInLine method
+
+- fixed: Lexer constructor
+  from __construct($input, $state=null) to __construct($input, &$state=null)
+  This looks like a typical potential error when one translates java to php.
