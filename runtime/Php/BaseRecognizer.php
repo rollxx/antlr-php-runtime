@@ -55,6 +55,7 @@ abstract class BaseRecognizer{
 	{
 		//System.out.println("match "+((TokenStream)input).LT(1));
 		$matchedSymbol = $this->getCurrentInputSymbol($input);
+		echo 'LA(1): '.$input->LA(1).'; ttype: '.$ttype;
 		if ( $input->LA(1)==$ttype ) {
 			$input->consume();
 			$this->state->errorRecovery = false;

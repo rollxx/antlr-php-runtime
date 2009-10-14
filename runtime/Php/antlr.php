@@ -7,6 +7,7 @@
 	require_once 'RecognizerSharedState.php';
 	require_once 'CharStreamState.php';
 	require_once 'ANTLRStringStream.php';
+	require_once 'ANTLRFileStream.php';
 	require_once 'Token.php';
 	require_once 'CommonToken.php';
 	require_once 'TokenStream.php';

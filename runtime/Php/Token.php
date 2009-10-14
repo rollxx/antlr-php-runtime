@@ -12,7 +12,7 @@
 
 		public static $MIN_TOKEN_TYPE;// = UP+1;
 
-	    public static $EOF;// = CharStream.EOF;
+		public static $EOF;// = CharStream.EOF;
 		public static $EOF_TOKEN;// = new CommonToken(EOF);
 
 		public static $INVALID_TOKEN_TYPE = 0;
@@ -66,9 +66,5 @@
 	
 	
 	TokenConst::$MIN_TOKEN_TYPE = TokenConst::$UP+1;
-
-
-
-	
 	
 ?>

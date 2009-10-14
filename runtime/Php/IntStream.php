@@ -73,7 +73,7 @@ interface IntStream {
 	 *  argument.  So if you're nested 5 levels of mark(), and then release(2)
 	 *  you have to release resources for depths 2..5.
 	 */
-	function release($marker);
+	function release($marker=null);
 
 	/** Set the input cursor to the position indicated by index.  This is
 	 *  normally used to seek ahead in the input stream.  No buffering is

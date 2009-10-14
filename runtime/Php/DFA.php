@@ -2,6 +2,7 @@
 /*
  [The "BSD licence"]
  Copyright (c) 2005-2008 Terence Parr
+ Copyright (c) 2009 Yauhen Yakimovich
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -42,10 +43,10 @@ class DFA {
 	protected $eot;
 	protected $eof;
 	protected $min;
-    protected $max;
-    protected $accept;
-    protected $special;
-    protected $transition;
+	protected $max;
+	protected $accept;
+	protected $special;
+	protected $transition;
 
 	protected $decisionNumber;
 
@@ -63,7 +64,11 @@ class DFA {
 	//Possibly rewrite  predict. There is one more place i might need to fix, where i thought 
 	//try{}catch(ex){[work]; throw ex}; [work]; would be the same as a try finally;
 	
-	public function predict($input){
+	public function predict($input){		
+		if ($input == null)
+			throw new Exception("input object is a null pointer");
+		if (!is_object($input))
+			throw new Exception("input is not an object");
 		if ( $this->debug ) {
 			echo ("Enter DFA.predict for decision ".$this->decisionNumber);
 		}
@@ -116,9 +121,9 @@ class DFA {
 						// must check EOT, which is like the else clause.
 						// eot[s]>=0 indicates that an EOT edge goes to another
 						// state.
-						if ( $eot[$s]>=0 ) {  // EOT Transition to accept state?
+						if ( $this->eot[$s]>=0 ) {  // EOT Transition to accept state?
 							if ( $this->debug ) echo("EOT transition");
-							$s = $eot[$s];
+							$s = $this->eot[$s];
 							$input->consume();
 							// TODO: I had this as return accept[eot[s]]
 							// which assumed here that the EOT edge always
@@ -134,15 +139,15 @@ class DFA {
 					$input->consume();
 					continue;
 				}
-				if ( $eot[$s]>=0 ) {  // EOT Transition?
+				if ( $this->eot[$s]>=0 ) {  // EOT Transition?
 					if ( $this->debug ) println("EOT transition");
 					$s = $this->eot[$s];
 					$input->consume();
 					continue;
 				}
-				if ( $c==Token::$EOF && $eof[$s]>=0 ) {  // EOF Transition to accept state?
-					if ( $this->debug ) echo ("accept via EOF; predict "+$this->accept[$eof[$s]]+" from "+$eof[$s]);
-					return $this->accept[$eof[$s]];
+				if ( $c==TokenConst::$EOF && $this->eof[$s]>=0 ) {  // EOF Transition to accept state?
+					if ( $this->debug ) echo ("accept via EOF; predict "+$this->accept[$this->eof[$s]]+" from "+$this->eof[$s]);
+					return $this->accept[$this->eof[$s]];
 				}
 				// not in range and not EOF/EOT, must be invalid symbol
 				if ( $this->debug ) {
@@ -168,7 +173,7 @@ class DFA {
 		}
 		$nvae =
 			new NoViableAltException($this->getDescription(),
-									 $decisionNumber,
+									 $this->decisionNumber,
 									 $s,
 									 $input);
 		$this->error($nvae);

@@ -1,9 +1,13 @@
 <?php
-// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 CommonLexer.g 2009-04-20 00:26:12
+// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 18:10:16
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
  */
+
+# for convenience in actions
+if (!defined('HIDDEN')) define('HIDDEN', BaseRecognizer::$HIDDEN);
+
       
 function CommonLexer_DFA11_static(){
     $eotS =

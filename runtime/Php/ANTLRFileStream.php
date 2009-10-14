@@ -49,12 +49,15 @@ class ANTLRFileStream extends ANTLRStringStream {
 		if ( $fileName==null ) {
 			return;
 		}
+		if (!file_exists($fileName)) {
+			throw new Exception("Can't find file: $fileName");
+		}
 		// TODO: encoding with stream context
 		return file_get_contents($fileName);
 	}
 
-	public String getSourceName() {
-		return fileName;
+	public function getSourceName() {
+		return $this->fileName;
 	}
 }
 ?>
