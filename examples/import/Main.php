@@ -10,16 +10,15 @@ require_once 'SimpleParser.php';
 # usage: php Main.php input
 #
 
-$input = new ANTLRFileStream($argv[0]);
-$lexer = new SimpleLexer(input);
-$tokens = new CommonTokenStream(lexer);
+$input = new ANTLRFileStream(dirname(__FILE__).DIRECTORY_SEPARATOR.$argv[1]);
+$lexer = new SimpleLexer($input);
+$tokens = new CommonTokenStream($lexer);
 
-/*
-	for (Object t : tokens.getTokens()) {
-		System.out.println(t);
-	}
-*/
-$parser = new SimpleParser(tokens);
+foreach ($tokens->getTokens() as $t) {
+		echo $t."\n";
+}
+
+$parser = new SimpleParser($tokens);
 $parser->file();
 
 ?>

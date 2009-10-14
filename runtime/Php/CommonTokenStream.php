@@ -302,7 +302,7 @@ class CommonTokenStream implements TokenStream {
 		return $this->lastMarker;
 	}
 
-	public function release($marker) {
+	public function release($marker=null) {
 		// no resources to release
 	}
 

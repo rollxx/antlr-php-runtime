@@ -272,7 +272,7 @@ abstract class AntlrLexer extends BaseRecognizer{
 		if ($c==TokenConst::$EOF){
 			$s = "<EOF>";
 		}
-		return "'"+s+"'";
+		return "'"+$s+"'";
 	}
 	
 	/** Lexers can normally match any char in it's vocabulary after matching

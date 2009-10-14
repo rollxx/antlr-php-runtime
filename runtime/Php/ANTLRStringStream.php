@@ -3,6 +3,16 @@
 
 	class ANTLRStringStream implements CharStream {
 
+		private $p;
+		public  $line;
+		public  $charPositionInLine;
+		public  $markDepth;
+		public  $markers;
+		public  $lastMarker;
+		private $name;
+		private $data;
+		private $n;
+
 		/** Copy data in string to a local char array */
 		public function __construct($input) {
 			$this->p=0;
@@ -28,18 +38,18 @@
 			$this->markDepth = 0;
 		}
 
-	    public function consume() {
-	        if ( $this->p < $this->n ) {
+		public function consume() {
+	        	if ( $this->p < $this->n ) {
 				$this->charPositionInLine++;
 				if ( $this->data[$this->p]==ord("\n") ) {
 					$this->line++;
 					$this->charPositionInLine=0;
 				}
-	            $this->p++;
-	        }
-	    }
+		            $this->p++;
+		        }
+		}	
 
-	    public function LA($i) {
+		public function LA($i) {
 			if ( $i==0 ) {
 				return 0; // undefined
 			}
@@ -51,42 +61,41 @@
 			}
 
 			if ( ($this->p+$i-1) >= $this->n ) {
-	            //System.out.println("char LA("+i+")=EOF; p="+p);
-	            return CharStreamConst::$EOF;
-	        }
-	        //System.out.println("char LA("+i+")="+(char)data[p+i-1]+"; p="+p);
+		        //System.out.println("char LA("+i+")=EOF; p="+p);
+		        return CharStreamConst::$EOF;
+		        }
+		        //System.out.println("char LA("+i+")="+(char)data[p+i-1]+"; p="+p);
 			//System.out.println("LA("+i+"); p="+p+" n="+n+" data.length="+data.length);
 			return $this->data[$this->p+$i-1];
-	    }
+		}
 
 		public function LT($i) {
 			return $this->LA($i);
 		}
 
 		/** Return the current input symbol index 0..n where n indicates the
-	     *  last symbol has been read.  The index is the index of char to
+		 *  last symbol has been read.  The index is the index of char to
 		 *  be returned from LA(1).
-	     */
-	    public function index() {
-	        return $this->p;
-	    }
+		 */
+		public function index() {
+	        	return $this->p;
+		}
 
 		public function size() {
 			return $this->n;
 		}
 
 		public function mark() {
-	        if ( $this->markers == null) {
-	            $this->markers = array();
-	            $this->markers[] = null; // depth 0 means no backtracking, leave blank
-	        }
-	        $this->markDepth++;
-			$state = null;
+	        	if ( $this->markers == null) {
+		            $this->markers = array();
+		            $this->markers[] = null; // depth 0 means no backtracking, leave blank
+		        }
+		        $this->markDepth++;
+				$state = null;
 			if ($this->markDepth>=sizeof($this->markers)) {
 				$state = new CharStreamState();
 				$this->markers[] = $state;
-			}
-			else {
+			} else {
 				$state = $this->markers[$this->markDepth];
 			}
 			$state->p = $this->p;
@@ -94,12 +103,12 @@
 			$state->charPositionInLine = $this->charPositionInLine;
 			$this->lastMarker = $this->markDepth;
 			return $this->markDepth;
-	    }
+		}
 
-	    public function rewind($m=null) {
+		public function rewind($m=null) {
 			if($m===null){
 				$this->rewind((int)$this->lastMarker);
-			}else{
+			} else {
 				$state = $this->markers[$m];
 				// restore stream state
 				$this->seek($state->p);
@@ -109,7 +118,12 @@
 			}
 		}
 
-		public function release($marker) {
+		public function release($marker=null) {
+			if ($marker==null)
+			{	
+				$this->rewind();
+				return;
+			}
 			// unwind any other markers made after m and release m
 			$this->markDepth = $marker;
 			// release this marker

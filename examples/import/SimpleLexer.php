@@ -1,5 +1,9 @@
 <?php
-// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 Simple__.g 2009-04-20 01:01:59
+// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 Simple__.g 2009-04-27 18:10:17
+
+
+# for convenience in actions
+if (!defined('HIDDEN')) define('HIDDEN', BaseRecognizer::$HIDDEN);
 
       
 function SimpleLexer_DFA1_static(){
@@ -103,7 +107,7 @@ class SimpleLexer extends AntlrLexer {
 
     function __construct($input, $state=null){
         parent::__construct($input,$state);
-        $this->gCommonLexer = new Simple_CommonLexer(input, state, this);
+        $this->gCommonLexer = new Simple_CommonLexer($input, $state, $this);
         
             $this->dfa1 = new SimpleLexer_DFA1($this);
     }
@@ -231,7 +235,7 @@ class SimpleLexer extends AntlrLexer {
             case 5 :
                 // Simple__.g:1:34: CommonLexer. Tokens 
                 {
-                gCommonLexer.$this->mTokens(); 
+                $this->gCommonLexer->mTokens(); 
 
                 }
                 break;
