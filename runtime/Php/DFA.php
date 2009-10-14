@@ -208,6 +208,15 @@ class DFA {
 		}
 		return $data;
 	}
+
+	/**  GetToken is used as a wrap arround getToken method in recognizer,
+	 *   because of code generation details in Php.stg
+	 *
+	 **/
+	function getToken($name)
+	{
+		return $this->recognizer->getToken($name);
+	}
 }
 
 ?>
