@@ -17,9 +17,9 @@ class LexerTest012 extends PHPUnit_Framework_TestCase{
 		$result = $this->readFile('test/t012lexerXML.output');
 		$lexer = $this->lexer($input);
 		while(true){
-            $token = $lexer->nextToken();
-            if ($token->type == TokenConst::$EOF){
-                break;
+			$token = $lexer->nextToken();
+			if ($token->type == TokenConst::$EOF){
+	         	       break;
 			}
 		}
 		echo self::assertEquals($lexer->buf, $result);

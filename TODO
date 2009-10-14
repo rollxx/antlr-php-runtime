@@ -1,0 +1,6 @@
+
+- Php.stg: translate specialStateTransition from Java to Php
+           to reproduce run phpunit Lexer012Test.php
+
+
+
