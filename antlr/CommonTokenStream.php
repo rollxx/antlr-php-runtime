@@ -35,7 +35,7 @@
  *  TODO: how to access the full token stream?  How to track all tokens matched per rule?
  */
 class CommonTokenStream implements TokenStream {
-    protected $tokenSource;
+	protected $tokenSource;
 
 	/** Record every single token pulled from the source so we can reproduce
 	 *  chunks of it later.

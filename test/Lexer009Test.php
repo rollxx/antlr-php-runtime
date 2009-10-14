@@ -3,7 +3,7 @@
 require_once 'PHPUnit/Framework.php';
 require_once "antlr.php";
 require_once "t009lexer.php";
-class LexerTest008 extends PHPUnit_Framework_TestCase{
+class LexerTest009 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
 	
