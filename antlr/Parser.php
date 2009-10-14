@@ -31,7 +31,7 @@
 /** A parser for TokenStreams.  "parser grammars" result in a subclass
  *  of this.
  */
-class AntlrParser extends BaseRecognizer {
+class Parser extends BaseRecognizer {
 	public $input;
 
 

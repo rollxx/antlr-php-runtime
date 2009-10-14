@@ -162,6 +162,8 @@ return false;
 }
 >>
 
+actionGate() ::= "state.backtracking==0"
+
 filteringActionGate() ::= "state.backtracking==1"
 
 /** How to generate a parser */
@@ -250,7 +252,11 @@ parser(grammar, name, scopes, tokens, tokenNames, rules, numRules, bitsets, ASTL
 /** How to generate a tree parser; same as parser except the input
  *  stream is a different type.
  */
-treeParser(grammar, name, scopes, tokens, tokenNames, globalAction, rules, numRules, bitsets, labelType={<ASTLabelType>}, ASTLabelType="Object", superClass="TreeParser", members={<actions.treeparser.members>}) ::= <<
+treeParser(grammar, name, scopes, tokens, tokenNames, globalAction, rules, 
+           numRules, bitsets, labelType={<ASTLabelType>}, ASTLabelType="Object", 
+           superClass="TreeParser", 
+           members={<actions.treeparser.members>},
+           filterMode) ::= <<
 <genericParser(inputStreamType="TreeNodeStream", rewriteElementType="Node", ...)>
 >>
 
@@ -1325,17 +1331,11 @@ ruleSetPropertyRef_st(scope,attr,expr) ::= "retval.st =<expr>;"
 /** How to execute an action (only when not backtracking) */
 execAction(action) ::= <<
 <if(backtracking)>
-<if(actions.(actionScope).synpredgate)>
 if ( <actions.(actionScope).synpredgate> ) {
   <action>
 }
 <else>
-if ( state.backtracking==0 ) {
   <action>
-}
-<endif>
-<else>
-<action>
 <endif>
 >>
 
