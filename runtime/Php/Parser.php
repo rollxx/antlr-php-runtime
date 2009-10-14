@@ -34,11 +34,10 @@
 class AntlrParser extends BaseRecognizer {
 	public $input;
 
-
 	public function __construct($input, $state = null) {
 		parent::__construct($state); // share the state object with another parser
 		$this->setTokenStream($input);
-    }
+    	}
 
 	public function reset() {
 		parent::reset(); // reset all recognizer state variables
@@ -67,7 +66,7 @@ class AntlrParser extends BaseRecognizer {
 		}
 		$t->line = $current->getLine();
 		$t->charPositionInLine = $current->getCharPositionInLine();
-		$t->channel = $DEFAULT_TOKEN_CHANNEL;
+		$t->channel = BaseRecognizer::$DEFAULT_TOKEN_CHANNEL;
 		return $t;
 	}
 
@@ -78,7 +77,7 @@ class AntlrParser extends BaseRecognizer {
 		$this->input = $input;
 	}
 
-    public function getTokenStream() {
+    	public function getTokenStream() {
 		return $this->input;
 	}
 

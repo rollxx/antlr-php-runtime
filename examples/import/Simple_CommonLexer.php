@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 18:10:17
+// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 21:20:22
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
@@ -110,7 +110,7 @@ class Simple_CommonLexer extends AntlrLexer {
         $this->gSimple = $this->gSimple;
         $this->gParent = $this->gSimple;
         
-            $this->dfa11 = new Simple_CommonLexer_DFA11($this);
+	$this->dfa11 = new Simple_CommonLexer_DFA11($this);	
     }
     function getGrammarFileName() { return "CommonLexer.g"; }
 
@@ -632,6 +632,8 @@ class Simple_CommonLexer extends AntlrLexer {
               $_channel=HIDDEN;
 
             }
+
+	    //var_dump($_channel);
 
             $this->state->type = $_type;
             $this->state->channel = $_channel;

@@ -32,7 +32,7 @@ public class SimpleLexer extends Lexer {
     }
     public SimpleLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
-        gCommonLexer = new Simple_CommonLexer(input, state, this);
+        gCommonLexer = new Simple_CommonLexer(input, state, this);        
     }
     public String getGrammarFileName() { return "Simple__.g"; }
 
@@ -122,6 +122,7 @@ public class SimpleLexer extends Lexer {
         // Simple__.g:1:8: ( T__13 | T__14 | T__15 | T__16 | CommonLexer. Tokens )
         int alt1=5;
         alt1 = dfa1.predict(input);
+        //System.out.print("predict: "+alt1+"\n");
         switch (alt1) {
             case 1 :
                 // Simple__.g:1:10: T__13

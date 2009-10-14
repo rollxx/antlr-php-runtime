@@ -55,7 +55,7 @@
 			 *  something nonnull so that the auto token emit mechanism will not
 			 *  emit another token.
 			 */
-		    $this->token = null;
+			$this->token = null;
 
 			/** What character index in the stream did the current token start at?
 			 *  Needed, for example, to get the text for current token.  Set at

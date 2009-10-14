@@ -12,6 +12,7 @@ require_once 'SimpleParser.php';
 
 $input = new ANTLRFileStream(dirname(__FILE__).DIRECTORY_SEPARATOR.$argv[1]);
 $lexer = new SimpleLexer($input);
+//$lexer = new CommonLexer($input);
 $tokens = new CommonTokenStream($lexer);
 
 foreach ($tokens->getTokens() as $t) {

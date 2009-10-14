@@ -7,10 +7,21 @@
 		}
 		*/
 		public function __construct($input=null, $type, $channel=0, $start=0, $stop=0) {
-			$this->charPositionInLine=-1;
+			/*if (is_object($type) && instanceof Token) 
+			{
+
+			} */
 			$this->input = $input;
+			$this->charPositionInLine=$start;		
 			$this->type = $type;
-			$this->channel = $channel;
+			
+			if (is_int($channel)) {
+				$this->channel = $channel;
+			} else if (is_string($channel)) {			
+				$this->channel = TokenConst::$DEFAULT_CHANNEL;
+				$this->text = $channel;
+			}
+			
 			$this->start = $start;
 			$this->stop = $stop;
 		}
@@ -18,26 +29,26 @@
 		public static function forType($type){
 			return new CommonToken($input=null, $type);
 		}
-		/*
-		public CommonToken(int type, String text) {
-			$this->type = type;
-			$this->channel = DEFAULT_CHANNEL;
-			$this->text = text;
-		}
 
-		public CommonToken(Token oldToken) {
-			text = oldToken.getText();
-			type = oldToken.getType();
-			line = oldToken.getLine();
-			index = oldToken.getTokenIndex();
-			charPositionInLine = oldToken.getCharPositionInLine();
-			channel = oldToken.getChannel();
-			if ( oldToken instanceof CommonToken ) {
-				start = ((CommonToken)oldToken).start;
-				stop = ((CommonToken)oldToken).stop;
+		public function FromToken(Token $oldToken) {
+			$text = $oldToken->getText();
+			$type = $oldToken->getType();
+			$line = $oldToken->getLine();
+			$index = $oldToken->getTokenIndex();
+			$charPositionInLine = $oldToken->getCharPositionInLine();
+			$channel = $oldToken->getChannel();
+			if ( $oldToken instanceof CommonToken ) {
+				$start = $oldToken->start;
+				$stop = $oldToken->stop;
 			}
+			$token = new CommonToken(null, $type, $channel, $start, $stop);
+			$token->text = $text;
+			$token->line = $line;
+			$token->index = $index;
+			$token->charPositionInLine = $charPositionInLine;
+			return $token;
 		}
-		*/
+		
 		public function getType() {
 			return $this->type;
 		}
@@ -75,7 +86,7 @@
 		}
 
 		public function setCharPositionInLine($charPositionInLine) {
-			$this->charPositionInLine = $this->charPositionInLine;
+			$this->charPositionInLine = $charPositionInLine;
 		}
 
 		public function getChannel() {
