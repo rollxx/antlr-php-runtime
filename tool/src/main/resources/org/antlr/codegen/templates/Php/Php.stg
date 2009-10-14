@@ -65,8 +65,8 @@ if (!defined('HIDDEN')) define('HIDDEN', BaseRecognizer::$HIDDEN);
 
 lexer(grammar, name, tokens, scopes, rules, numRules, labelType="Token",
       filterMode, superClass="AntlrLexer") ::= <<
-      
-<cyclicDFAs:cyclicDFA()> <! dump tables for all DFA !>
+ 
+<cyclicDFAs:cyclicDFA()> <! dump tables for all DFA !>     
 
 class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
     <tokens:{static $<it.name>=<it.type>;}; separator="\n">
@@ -89,7 +89,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 <endif>
 <endif>
         <grammar.directDelegates:
-         {g|$this-><g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, <p:delegateName()>}>, $this);}; separator="\n">
+         {g|$this-><g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, <p:delegateName()>}>);}; separator="\n">
         <grammar.delegators:
          {g|$this-><g:delegateName()> = $this-><g:delegateName()>;}; separator="\n">
         <last(grammar.delegators):{g|$this->gParent = $this-><g:delegateName()>;}>
@@ -841,7 +841,7 @@ match(input, Token.UP, null); <checkRuleBacktrackFailure()>
 validateSemanticPredicate(pred,description) ::= <<
 if ( !(<evalPredicate(...)>) ) {
     <ruleBacktrackFailure()>
-    throw new FailedPredicateException(input, "<ruleName>", "<description>");
+    throw new FailedPredicateException($this->input, "<ruleName>", "<description>");
 }
 >>
 
@@ -1023,7 +1023,7 @@ class <grammar.recognizerName>_DFA<dfa.decisionNumber> extends DFA {
     }
     <@errorMethod()>
 <if(dfa.specialStateSTs)>
-    public function specialStateTransition(int $s, IntStream $_input) {
+    public function specialStateTransition($s, IntStream $_input) {
         <if(LEXER)>
         $input = $_input;
         <endif>
@@ -1101,7 +1101,7 @@ lookaheadTest(atom,k,atomAsInt) ::= "$LA<decisionNumber>_<stateNumber>==$this->g
 /** Sometimes a lookahead test cannot assume that LA(k) is in a temp variable
  *  somewhere.  Must ask for the lookahead directly.
  */
-isolatedLookaheadTest(atom,k,atomAsInt) ::= "$this->input->LA(<k>)==<atom>"
+isolatedLookaheadTest(atom,k,atomAsInt) ::= "$this->input->LA(<k>)==$this->getToken('<atom>')"
 
 lookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= <<
 ($LA<decisionNumber>_<stateNumber>\>=$this->getToken('<lower>') && $LA<decisionNumber>_<stateNumber>\<=$this->getToken('<upper>'))

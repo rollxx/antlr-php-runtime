@@ -21,6 +21,7 @@
 	require_once 'EarlyExitException.php';
 	require_once 'MismatchedRangeException.php';
 	require_once 'MismatchedSetException.php';
+	require_once 'FailedPredicateException.php';
 
 	# Recogizers
 	require_once 'DFA.php';
