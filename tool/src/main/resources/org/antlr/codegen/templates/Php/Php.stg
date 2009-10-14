@@ -1107,7 +1107,7 @@ lookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= <<
 ($LA<decisionNumber>_<stateNumber>\>=$this->getToken('<lower>') && $LA<decisionNumber>_<stateNumber>\<=$this->getToken('<upper>'))
 >>
 
-isolatedLookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= "($this->input->LA(<k>)\>=<lower> && $this->input->LA(<k>)\<=<upper>)"
+isolatedLookaheadRangeTest(lower,upper,k,rangeNumber,lowerAsInt,upperAsInt) ::= "($this->input->LA(<k>)\>=$this->getToken('<lower>') && $this->input->LA(<k>)\<=$this->getToken('<upper>'))"
 
 setTest(ranges) ::= "<ranges; separator=\"||\">"
 

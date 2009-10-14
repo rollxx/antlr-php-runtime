@@ -15,12 +15,11 @@ $lexer = new SimpleLexer($input);
 //$lexer = new CommonLexer($input);
 $tokens = new CommonTokenStream($lexer);
 
-foreach ($tokens->getTokens() as $t) {
+/*foreach ($tokens->getTokens() as $t) {
 		echo $t."\n";
-}
+}*/
 
 $parser = new SimpleParser($tokens);
 $parser->file();
 
 ?>
-
