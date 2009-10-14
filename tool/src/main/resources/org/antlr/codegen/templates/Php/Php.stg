@@ -1019,29 +1019,29 @@ class <grammar.recognizerName>_DFA<dfa.decisionNumber> extends DFA {
     }
     <@errorMethod()>
 <if(dfa.specialStateSTs)>
-    public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+    public function specialStateTransition(int $s, IntStream $_input) {
         <if(LEXER)>
-        IntStream input = _input;
+        $input = $_input;
         <endif>
         <if(PARSER)>
-        TokenStream input = (TokenStream)_input;
+        $input = $_input; //(TokenStream) $_input;
         <endif>
         <if(TREE_PARSER)>
-        TreeNodeStream input = (TreeNodeStream)_input;
+        $input = $_input; //(TreeNodeStream) $_input;
         <endif>
-    	int _s = s;
-        switch ( s ) {
+    	$_s = $s;
+        switch ( $s ) {
         <dfa.specialStateSTs:{state |
         case <i0> : <! compressed special state numbers 0..n-1 !>
             <state>}; separator="\n">
         }
 <if(backtracking)>
-        if (state.backtracking>0) {state.failed=true; return -1;}<\n>
+        if ($this->state->backtracking>0) {$this->state->failed=true; return -1;}<\n>
 <endif>
-        NoViableAltException nvae =
-            new NoViableAltException(getDescription(), <dfa.decisionNumber>, _s, input);
-        error(nvae);
-        throw nvae;
+        $nvae =
+            new NoViableAltException($this->getDescription(), <dfa.decisionNumber>, $_s, $input);
+        $this->error($nvae);
+        return 0;
     }<\n>
 <endif>
 }<\n>
@@ -1051,17 +1051,17 @@ class <grammar.recognizerName>_DFA<dfa.decisionNumber> extends DFA {
  *  state.
  */
 cyclicDFAState(decisionNumber,stateNumber,edges,needErrorClause,semPredState) ::= <<
-int LA<decisionNumber>_<stateNumber> = input.LA(1);<\n>
+$LA<decisionNumber>_<stateNumber> = $input->LA(1);<\n>
 <if(semPredState)> <! get next lookahead symbol to test edges, then rewind !>
-int index<decisionNumber>_<stateNumber> = input.index();
-input.rewind();<\n>
+$index<decisionNumber>_<stateNumber> = $input->index();
+$input->rewind();<\n>
 <endif>
-s = -1;
+$s = -1;
 <edges; separator="\nelse ">
 <if(semPredState)> <! return input cursor to state before we rewound !>
-input.seek(index<decisionNumber>_<stateNumber>);<\n>
+$input->seek($index<decisionNumber>_<stateNumber>);<\n>
 <endif>
-if ( s>=0 ) return s;
+if ( $s>=0 ) return $s;
 break;
 >>
 
@@ -1069,14 +1069,14 @@ break;
  *  state to jump to next if successful.
  */
 cyclicDFAEdge(labelExpr, targetStateNumber, edgeNumber, predicates) ::= <<
-if ( (<labelExpr>) <if(predicates)>&& (<predicates>)<endif>) {s = <targetStateNumber>;}<\n>
+if ( (<labelExpr>) <if(predicates)>&& (<predicates>)<endif>) {$s = <targetStateNumber>;}<\n>
 >>
 
 /** An edge pointing at end-of-token; essentially matches any char;
  *  always jump to the target.
  */
 eotDFAEdge(targetStateNumber,edgeNumber, predicates) ::= <<
-s = <targetStateNumber>;<\n>
+$s = <targetStateNumber>;<\n>
 >>
 
 
