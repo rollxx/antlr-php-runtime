@@ -1,6 +1,14 @@
 
-Original project by sidharth.kuruvila
+ History
+ =======
 
+October 2008 - initiation and work on the project by Sidharth Kuruvila
+
+April 2009   - contributions by Yauhen Yakimovich
+
+
+ Development
+ ===========
 
 This is still very early stages so expect a lot to break.
 
