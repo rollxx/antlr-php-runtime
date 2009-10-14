@@ -1,7 +1,7 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
 class ANTLRStringStreamTest extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}

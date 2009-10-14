@@ -1,9 +1,9 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t017parserLexer.php";
-require "t017parserParser.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t017parserLexer.php";
+require_once "t017parserParser.php";
 
 class parser extends t017parserParser{
 	public $reportedErrors = array();

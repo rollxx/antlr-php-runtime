@@ -1,8 +1,8 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t001lexer.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t001lexer.php";
 class LexerTest001 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
