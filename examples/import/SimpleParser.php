@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 Simple.g 2009-04-27 21:20:21
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g 2009-05-05 23:09:19
 
 
 # for convenience in actions
@@ -31,12 +31,12 @@ class SimpleParser extends AntlrParser {
     static $FOLLOW_13_in_file32;
     static $FOLLOW_ID_in_file34;
     static $FOLLOW_14_in_file36;
-    static $FOLLOW_decl_in_file47;
-    static $FOLLOW_15_in_decl62;
-    static $FOLLOW_ID_in_decl64;
-    static $FOLLOW_16_in_decl67;
-    static $FOLLOW_expr_in_decl69;
-    static $FOLLOW_14_in_decl73;
+    static $FOLLOW_decl_in_file51;
+    static $FOLLOW_15_in_decl66;
+    static $FOLLOW_ID_in_decl68;
+    static $FOLLOW_16_in_decl71;
+    static $FOLLOW_expr_in_decl73;
+    static $FOLLOW_14_in_decl77;
     static $FOLLOW_set_in_expr0;
 
     
@@ -54,24 +54,24 @@ class SimpleParser extends AntlrParser {
         
 
     public function getTokenNames() { return SimpleParser::$tokenNames; }
-    public function getGrammarFileName() { return "Simple.g"; }
+    public function getGrammarFileName() { return "C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g"; }
 
 
 
     // $ANTLR start "file"
-    // Simple.g:10:1: file : 'program' ID ';' ( decl )+ ; 
+    // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:10:1: file : 'program' ID ';' ( decl )+ ; 
     public function file(){
         $ID1=null;
 
         try {
-            // Simple.g:10:6: ( 'program' ID ';' ( decl )+ ) 
-            // Simple.g:10:8: 'program' ID ';' ( decl )+ 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:10:6: ( 'program' ID ';' ( decl )+ ) 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:10:8: 'program' ID ';' ( decl )+ 
             {
             $this->match($this->input,$this->getToken('13'),self::$FOLLOW_13_in_file32); 
             $ID1=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_file34); 
             $this->match($this->input,$this->getToken('14'),self::$FOLLOW_14_in_file36); 
-              System.out.println("found program "+($ID1!=null?$ID1->getText():null));
-            // Simple.g:11:8: ( decl )+ 
+              echo "found program " . ($ID1!=null?$ID1->getText():null) . "\n";
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:13:2: ( decl )+ 
             $cnt1=0;
             //loop1:
             do {
@@ -85,9 +85,9 @@ class SimpleParser extends AntlrParser {
 
                 switch ($alt1) {
             	case 1 :
-            	    // Simple.g:11:8: decl 
+            	    // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:13:2: decl 
             	    {
-            	    $this->pushFollow(self::$FOLLOW_decl_in_file47);
+            	    $this->pushFollow(self::$FOLLOW_decl_in_file51);
             	    $this->decl();
 
             	    $this->state->_fsp--;
@@ -123,17 +123,17 @@ class SimpleParser extends AntlrParser {
 
 
     // $ANTLR start "decl"
-    // Simple.g:14:1: decl : 'var' ID ( '=' expr )? ';' ; 
+    // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:16:1: decl : 'var' ID ( '=' expr )? ';' ; 
     public function decl(){
         $ID2=null;
 
         try {
-            // Simple.g:14:6: ( 'var' ID ( '=' expr )? ';' ) 
-            // Simple.g:14:8: 'var' ID ( '=' expr )? ';' 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:16:6: ( 'var' ID ( '=' expr )? ';' ) 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:16:8: 'var' ID ( '=' expr )? ';' 
             {
-            $this->match($this->input,$this->getToken('15'),self::$FOLLOW_15_in_decl62); 
-            $ID2=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_decl64); 
-            // Simple.g:14:17: ( '=' expr )? 
+            $this->match($this->input,$this->getToken('15'),self::$FOLLOW_15_in_decl66); 
+            $ID2=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_decl68); 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:16:17: ( '=' expr )? 
             $alt2=2;
             $LA2_0 = $this->input->LA(1);
 
@@ -142,10 +142,10 @@ class SimpleParser extends AntlrParser {
             }
             switch ($alt2) {
                 case 1 :
-                    // Simple.g:14:18: '=' expr 
+                    // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:16:18: '=' expr 
                     {
-                    $this->match($this->input,$this->getToken('16'),self::$FOLLOW_16_in_decl67); 
-                    $this->pushFollow(self::$FOLLOW_expr_in_decl69);
+                    $this->match($this->input,$this->getToken('16'),self::$FOLLOW_16_in_decl71); 
+                    $this->pushFollow(self::$FOLLOW_expr_in_decl73);
                     $this->expr();
 
                     $this->state->_fsp--;
@@ -156,8 +156,8 @@ class SimpleParser extends AntlrParser {
 
             }
 
-            $this->match($this->input,$this->getToken('14'),self::$FOLLOW_14_in_decl73); 
-              System.out.println("found var "+($ID2!=null?$ID2->getText():null));
+            $this->match($this->input,$this->getToken('14'),self::$FOLLOW_14_in_decl77); 
+              echo "found var " . ($ID2!=null?$ID2->getText():null) . "\n";
 
             }
 
@@ -176,13 +176,13 @@ class SimpleParser extends AntlrParser {
 
 
     // $ANTLR start "expr"
-    // Simple.g:18:1: expr : ( INT | FLOAT ); 
+    // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:21:1: expr : ( INT | FLOAT ); 
     public function expr(){
         try {
-            // Simple.g:18:6: ( INT | FLOAT ) 
-            // Simple.g: 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g:21:6: ( INT | FLOAT ) 
+            // C:\\data\\home\\ewger\\development\\php\\antlrPhp\\examples\\import\\Simple.g: 
             {
-            if ( ($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT) ) {
+            if ( ($this->input->LA(1)>=$this->getToken('INT') && $this->input->LA(1)<=$this->getToken('FLOAT')) ) {
                 $this->input->consume();
                 $this->state->errorRecovery=false;
             }
@@ -220,12 +220,12 @@ class SimpleParser extends AntlrParser {
 SimpleParser::$FOLLOW_13_in_file32 = new Set(array(4));
 SimpleParser::$FOLLOW_ID_in_file34 = new Set(array(14));
 SimpleParser::$FOLLOW_14_in_file36 = new Set(array(15));
-SimpleParser::$FOLLOW_decl_in_file47 = new Set(array(1, 15));
-SimpleParser::$FOLLOW_15_in_decl62 = new Set(array(4));
-SimpleParser::$FOLLOW_ID_in_decl64 = new Set(array(14, 16));
-SimpleParser::$FOLLOW_16_in_decl67 = new Set(array(5, 6));
-SimpleParser::$FOLLOW_expr_in_decl69 = new Set(array(14));
-SimpleParser::$FOLLOW_14_in_decl73 = new Set(array(1));
+SimpleParser::$FOLLOW_decl_in_file51 = new Set(array(1, 15));
+SimpleParser::$FOLLOW_15_in_decl66 = new Set(array(4));
+SimpleParser::$FOLLOW_ID_in_decl68 = new Set(array(14, 16));
+SimpleParser::$FOLLOW_16_in_decl71 = new Set(array(5, 6));
+SimpleParser::$FOLLOW_expr_in_decl73 = new Set(array(14));
+SimpleParser::$FOLLOW_14_in_decl77 = new Set(array(1));
 SimpleParser::$FOLLOW_set_in_expr0 = new Set(array(1));
 
 ?>

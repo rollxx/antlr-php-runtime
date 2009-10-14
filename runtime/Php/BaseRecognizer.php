@@ -834,6 +834,12 @@ abstract class BaseRecognizer{
 		echo "\n";
 	}
 
+	/**
+	 * Use this method in Php.stg: D F A  E X P R E S S I O N S work around
+	 * to avoid cases with ID, INT, FLOAT in generation of code 
+	 * statements like 
+	 * 	($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT)
+	 */
 	public function getToken($name){
 		if(preg_match("/\d+/", $name)){
 			return (integer)$name;

@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 Simple__.g 2009-04-27 21:20:22
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 Simple__.g 2009-05-05 23:09:20
 
 
 # for convenience in actions
@@ -109,8 +109,7 @@ class SimpleLexer extends AntlrLexer {
         parent::__construct($input,$state);
         $this->gCommonLexer = new Simple_CommonLexer($input, $state, $this);
         
-	$this->dfa1 = new SimpleLexer_DFA1($this);
-	$this->dfa1->debug = false;
+            $this->dfa1 = new SimpleLexer_DFA1($this);
     }
     function getGrammarFileName() { return "Simple__.g"; }
 

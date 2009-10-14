@@ -11,4 +11,9 @@
 - Php.stg: case examples/import/SimpleLexer.php: remove $this
 	$this->gCommonLexer = new Simple_CommonLexer($input, $state, $this);
 
+- Php.stg: case examples/import/SimpleParser.php:
+           fix INT FLOAT in this
+		if ( ($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT) )
+		
+
 

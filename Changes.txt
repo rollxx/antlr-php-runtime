@@ -1,9 +1,14 @@
-v0.0.1
+v0.0.1 // Yauhen Yakimovich 05.05.09
+
++ CONGRATS! examples/import parser and lexer works perfectly, starting another examples
+
+- fixed Php.stg:
+	added $this->getToken('<lower>') to isolatedLookaheadRangeTest template
 
 + lexer is working in case of examples/import (compared to java version)
 
 - fixed: CommonToken setCharPositionInLine method
 
 - fixed: Lexer constructor
-  from __construct($input, $state=null) to __construct($input, &$state=null)
-  This looks like a typical potential error when one translates java to php.
+from __construct($input, $state=null) to __construct($input, &$state=null)
+This looks like a typical potential error when one translates java to php.

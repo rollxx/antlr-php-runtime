@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 27, 2009 18:08:14 CommonLexer.g 2009-04-27 21:20:22
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 CommonLexer.g 2009-05-05 23:09:20
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
@@ -110,7 +110,7 @@ class Simple_CommonLexer extends AntlrLexer {
         $this->gSimple = $this->gSimple;
         $this->gParent = $this->gSimple;
         
-	$this->dfa11 = new Simple_CommonLexer_DFA11($this);	
+            $this->dfa11 = new Simple_CommonLexer_DFA11($this);
     }
     function getGrammarFileName() { return "CommonLexer.g"; }
 
@@ -122,7 +122,7 @@ class Simple_CommonLexer extends AntlrLexer {
             // CommonLexer.g:10:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* ) 
             // CommonLexer.g:10:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* 
             {
-            if ( ($this->input->LA(1)>=65 && $this->input->LA(1)<=90)||$this->input->LA(1)==95||($this->input->LA(1)>=97 && $this->input->LA(1)<=122) ) {
+            if ( ($this->input->LA(1)>=$this->getToken('65') && $this->input->LA(1)<=$this->getToken('90'))||$this->input->LA(1)==95||($this->input->LA(1)>=$this->getToken('97') && $this->input->LA(1)<=$this->getToken('122')) ) {
                 $this->input->consume();
 
             }
@@ -146,7 +146,7 @@ class Simple_CommonLexer extends AntlrLexer {
             	case 1 :
             	    // CommonLexer.g: 
             	    {
-            	    if ( ($this->input->LA(1)>=48 && $this->input->LA(1)<=57)||($this->input->LA(1)>=65 && $this->input->LA(1)<=90)||$this->input->LA(1)==95||($this->input->LA(1)>=97 && $this->input->LA(1)<=122) ) {
+            	    if ( ($this->input->LA(1)>=$this->getToken('48') && $this->input->LA(1)<=$this->getToken('57'))||($this->input->LA(1)>=$this->getToken('65') && $this->input->LA(1)<=$this->getToken('90'))||$this->input->LA(1)==95||($this->input->LA(1)>=$this->getToken('97') && $this->input->LA(1)<=$this->getToken('122')) ) {
             	        $this->input->consume();
 
             	    }
@@ -327,7 +327,7 @@ class Simple_CommonLexer extends AntlrLexer {
                 case 2 :
                     // CommonLexer.g:18:22: ~ ( '\\'' | '\\\\' ) 
                     {
-                    if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=38)||($this->input->LA(1)>=40 && $this->input->LA(1)<=91)||($this->input->LA(1)>=93 && $this->input->LA(1)<=65535) ) {
+                    if ( ($this->input->LA(1)>=$this->getToken('0') && $this->input->LA(1)<=$this->getToken('38'))||($this->input->LA(1)>=$this->getToken('40') && $this->input->LA(1)<=$this->getToken('91'))||($this->input->LA(1)>=$this->getToken('93') && $this->input->LA(1)<=$this->getToken('65535')) ) {
                         $this->input->consume();
 
                     }
@@ -389,7 +389,7 @@ class Simple_CommonLexer extends AntlrLexer {
             	case 2 :
             	    // CommonLexer.g:22:20: ~ ( '\\\\' | '\"' ) 
             	    {
-            	    if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=33)||($this->input->LA(1)>=35 && $this->input->LA(1)<=91)||($this->input->LA(1)>=93 && $this->input->LA(1)<=65535) ) {
+            	    if ( ($this->input->LA(1)>=$this->getToken('0') && $this->input->LA(1)<=$this->getToken('33'))||($this->input->LA(1)>=$this->getToken('35') && $this->input->LA(1)<=$this->getToken('91'))||($this->input->LA(1)>=$this->getToken('93') && $this->input->LA(1)<=$this->getToken('65535')) ) {
             	        $this->input->consume();
 
             	    }
@@ -533,7 +533,7 @@ class Simple_CommonLexer extends AntlrLexer {
             	case 1 :
             	    // CommonLexer.g:34:12: ~ ( '\\n' | '\\r' ) 
             	    {
-            	    if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=9)||($this->input->LA(1)>=11 && $this->input->LA(1)<=12)||($this->input->LA(1)>=14 && $this->input->LA(1)<=65535) ) {
+            	    if ( ($this->input->LA(1)>=$this->getToken('0') && $this->input->LA(1)<=$this->getToken('9'))||($this->input->LA(1)>=$this->getToken('11') && $this->input->LA(1)<=$this->getToken('12'))||($this->input->LA(1)>=$this->getToken('14') && $this->input->LA(1)<=$this->getToken('65535')) ) {
             	        $this->input->consume();
 
             	    }
@@ -607,7 +607,7 @@ class Simple_CommonLexer extends AntlrLexer {
             	case 1 :
             	    // CommonLexer.g: 
             	    {
-            	    if ( ($this->input->LA(1)>=9 && $this->input->LA(1)<=10)||$this->input->LA(1)==13||$this->input->LA(1)==32 ) {
+            	    if ( ($this->input->LA(1)>=$this->getToken('9') && $this->input->LA(1)<=$this->getToken('10'))||$this->input->LA(1)==13||$this->input->LA(1)==32 ) {
             	        $this->input->consume();
 
             	    }
@@ -632,8 +632,6 @@ class Simple_CommonLexer extends AntlrLexer {
               $_channel=HIDDEN;
 
             }
-
-	    //var_dump($_channel);
 
             $this->state->type = $_type;
             $this->state->channel = $_channel;
