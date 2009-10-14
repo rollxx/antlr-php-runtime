@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 Simple__.g 2009-04-20 00:26:14
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 Simple__.g 2009-04-20 01:01:59
 
       
 function SimpleLexer_DFA1_static(){
@@ -95,12 +95,15 @@ class SimpleLexer extends AntlrLexer {
     static $STRING=9;
 
     // delegates
-    public Simple_CommonLexer gCommonLexer;
+    /**
+    * @param Simple_CommonLexer $gCommonLexer
+    */
+    public $gCommonLexer;
     // delegators
 
     function __construct($input, $state=null){
         parent::__construct($input,$state);
-        gCommonLexer = new Simple_CommonLexer(input, state, this);
+        $this->gCommonLexer = new Simple_CommonLexer(input, state, this);
         
             $this->dfa1 = new SimpleLexer_DFA1($this);
     }

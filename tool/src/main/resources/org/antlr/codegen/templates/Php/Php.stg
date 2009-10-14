@@ -71,24 +71,24 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 
     // delegates
     <grammar.delegates:
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
+         {g|/**<\n>* @param <g.recognizerName> $<g:delegateName()><\n>*/<\n>public $<g:delegateName()>;}; separator="\n">
     // delegators
     <grammar.delegators:
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
-    <last(grammar.delegators):{g|public <g.recognizerName> gParent;}>
+         {g|/**<\n>* @param <g.recognizerName> $<g:delegateName()><\n>*/<\n>public $<g:delegateName()>;}; separator="\n">
+    <last(grammar.delegators):{g|/**<\n>* @param <g.recognizerName> $<g:delegateName()><\n>*/<\n>public $gParent;}>
 
     function __construct($input, $state=null){
         parent::__construct($input,$state);
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
-        state.ruleMemo = new HashMap[<numRules>+1];<\n> <! index from 1..n !>
+        $this->state->ruleMemo = new HashMap[<numRules>+1];<\n> <! index from 1..n !>
 <endif>
 <endif>
         <grammar.directDelegates:
-         {g|<g:delegateName()> = new <g.recognizerName>(input, state<trunc(g.delegators):{p|, <p:delegateName()>}>, this);}; separator="\n">
+         {g|$this-><g:delegateName()> = new <g.recognizerName>(input, state<trunc(g.delegators):{p|, <p:delegateName()>}>, this);}; separator="\n">
         <grammar.delegators:
-         {g|this.<g:delegateName()> = <g:delegateName()>;}; separator="\n">
-        <last(grammar.delegators):{g|gParent = <g:delegateName()>;}>
+         {g|$this-><g:delegateName()> = $this-><g:delegateName()>;}; separator="\n">
+        <last(grammar.delegators):{g|$this->gParent = $this-><g:delegateName()>;}>
         
         <actions.lexer.init>
             <cyclicDFAs:{dfa | $this->dfa<dfa.decisionNumber> = new <grammar.recognizerName>_DFA<dfa.decisionNumber>($this);}; separator="\n">

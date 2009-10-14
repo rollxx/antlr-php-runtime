@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 CommonLexer.g 2009-04-20 00:26:14
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 CommonLexer.g 2009-04-20 01:02:00
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
@@ -91,14 +91,20 @@ class Simple_CommonLexer extends AntlrLexer {
 
     // delegates
     // delegators
-    public SimpleLexer gSimple;
-    public SimpleLexer gParent;
+    /**
+    * @param SimpleLexer $gSimple
+    */
+    public $gSimple;
+    /**
+    * @param SimpleLexer $gSimple
+    */
+    public $gParent;
 
     function __construct($input, $state=null){
         parent::__construct($input,$state);
 
-        this.gSimple = gSimple;
-        gParent = gSimple;
+        $this->gSimple = $this->gSimple;
+        $this->gParent = $this->gSimple;
         
             $this->dfa11 = new Simple_CommonLexer_DFA11($this);
     }
