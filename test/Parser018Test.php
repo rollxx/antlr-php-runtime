@@ -1,9 +1,9 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t018llstarLexer.php";
-require "t018llstarParser.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t018llstarLexer.php";
+require_once "t018llstarParser.php";
 class ParserTest017 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}

@@ -1,9 +1,9 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t026actionsLexer.php";
-require "t026actionsParser.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t026actionsLexer.php";
+require_once "t026actionsParser.php";
 
 class Parser extends t026actionsParser{
 	public $_errors = array();

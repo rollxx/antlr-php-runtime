@@ -1,8 +1,8 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t005lexer.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t006lexer.php";
 class LexerTest005 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
@@ -12,13 +12,13 @@ class LexerTest005 extends PHPUnit_Framework_TestCase{
 	
 	public function test1(){
 		
-		$arr = array('fo', 'foo', 'fooo');
+		$arr = array('fo', 'faaooa');
 		
-		$ass = new ANTLRStringStream('ffofoofooo');
-		$lexer = new t005lexer($ass);
+		$ass = new ANTLRStringStream('fofaaooa');
+		$lexer = new t006lexer($ass);
 		foreach($arr as $val){
 			$token = $lexer->nextToken();
-			self::assertEquals(4, $token->getType());
+			self::assertEquals(t006lexer::$FOO, $token->getType());
 			self::assertEquals($val, $token->getText());
 		}
 		

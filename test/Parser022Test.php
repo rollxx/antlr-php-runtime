@@ -1,9 +1,9 @@
 <?php
 
-require 'PHPUnit/Framework.php';
-require "antlr.php";
-require "t022scopesLexer.php";
-require "t022scopesParser.php";
+require_once 'PHPUnit/Framework.php';
+require_once "antlr.php";
+require_once "t022scopesLexer.php";
+require_once "t022scopesParser.php";
 class ParserTest022 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
