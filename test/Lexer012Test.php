@@ -6,12 +6,12 @@ require_once "t012lexerXMLLexer.php";
 class LexerTest012 extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 	}
-	
+
 	protected function tearDown(){
 	}
-	
-	
-	
+
+
+
 	public function test1(){
 		$input = $this->readFile('test/t012lexerXML.input');
 		$result = $this->readFile('test/t012lexerXML.output');
@@ -19,18 +19,18 @@ class LexerTest012 extends PHPUnit_Framework_TestCase{
 		while(true){
 			$token = $lexer->nextToken();
 			if ($token->type == TokenConst::$EOF){
-	         	       break;
+				break;
 			}
 		}
 		echo self::assertEquals($lexer->buf, $result);
 	}
-	
+
 	function lexer($input){
 		$ass = new ANTLRStringStream($input);
 		$lexer = new t012lexerXMLLexer($ass);
 		return $lexer;
 	}
-	
+
 	function readFile($filename){
 		$handle = fopen($filename, "r");
 		$contents = fread($handle, filesize($filename));

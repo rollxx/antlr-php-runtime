@@ -333,7 +333,7 @@ rule(ruleName,ruleDescriptor,block,emptyRule,description,exceptions,finally,memo
 <returnScope(scope=ruleDescriptor.returnScope)>
 
 // $ANTLR start "<ruleName>"
-/* <fileName>:<description> */
+// <fileName>:<description> 
 public function <ruleName>(<ruleDescriptor.parameterScope:parameterScope(scope=it)>){
     <if(trace)>traceIn("<ruleName>", <ruleDescriptor.index>);<endif>
     <ruleScopeSetUp()>
@@ -517,7 +517,7 @@ function mTokens(){
 
 /** A (...) subrule with multiple alternatives */
 block(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,maxK,maxAlt,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 $alt<decisionNumber>=<maxAlt>;
 <decls>
 <@predecision()>
@@ -532,7 +532,7 @@ switch ($alt<decisionNumber>) {
 
 /** A rule block with multiple alternatives */
 ruleBlock(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,maxK,maxAlt,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 $alt<decisionNumber>=<maxAlt>;
 <decls>
 <@predecision()>
@@ -544,7 +544,7 @@ switch ($alt<decisionNumber>) {
 >>
 
 ruleBlockSingleAlt(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 <decls>
 <@prealt()>
 <alts>
@@ -553,7 +553,7 @@ ruleBlockSingleAlt(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNu
 
 /** A special case of a (...) subrule with a single alternative */
 blockSingleAlt(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 <decls>
 <@prealt()>
 <alts>
@@ -562,7 +562,7 @@ blockSingleAlt(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber
 
 /** A (..)+ block with 1 or more alternatives */
 positiveClosureBlock(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,maxK,maxAlt,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 $cnt<decisionNumber>=0;
 <decls>
 <@preloop()>
@@ -591,7 +591,7 @@ positiveClosureBlockSingleAlt ::= positiveClosureBlock
 
 /** A (..)* block with 1 or more alternatives */
 closureBlock(alts,decls,decision,enclosingBlockLevel,blockLevel,decisionNumber,maxK,maxAlt,description) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 <decls>
 <@preloop()>
 //loop<decisionNumber>:
@@ -631,7 +631,7 @@ case <i> :
 
 /** An alternative is just a list of elements; at outermost level */
 alt(elements,altNum,description,autoAST,outerAlt,treeLevel,rew) ::= <<
-/* <fileName>:<description> */
+// <fileName>:<description> 
 {
 <@declarations()>
 <elements:element()>
@@ -647,7 +647,7 @@ noRewrite(rewriteBlockLevel, treeLevel) ::= ""
 
 // E L E M E N T S
 
-/** Dump the elements one per line */
+/* Dump the elements one per line */
 element() ::= <<
 <@prematch()>
 <it.el><\n>
@@ -1041,7 +1041,7 @@ class <grammar.recognizerName>_DFA<dfa.decisionNumber> extends DFA {
         $nvae =
             new NoViableAltException($this->getDescription(), <dfa.decisionNumber>, $_s, $input);
         $this->error($nvae);
-        return 0;
+        throw $nvae;        
     }<\n>
 <endif>
 }<\n>
