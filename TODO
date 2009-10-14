@@ -1,19 +1,11 @@
 
-- Php.stg: translate specialStateTransition from Java to Php
-           to reproduce run phpunit Lexer012Test.php
-  Remark: it appears that ANTLRv3 is not able to parse this grammar properly
+- Implement trivial examples to test Lexer and Parser, then switch to AST 
+generation, and then to full sync with ANTLRv3
 
-- Php.stg: case examples/import/Simple_CommonLexer.php: fix this kind 
-	   of generation
-        $this->gSimple = $this->gSimple;
-        $this->gParent = $this->gSimple;
+- Add implementation of StringTemplate class in PHP 
+  (StringTemplateGroup for cminus example)
 
-- Php.stg: case examples/import/SimpleLexer.php: remove $this
-	$this->gCommonLexer = new Simple_CommonLexer($input, $state, $this);
+- Add codegeneration files AST.stg ASTParser.stg ASTTreeParser.stg ST.stg AST.stg ASTTreeParser.stg
 
-- Php.stg: case examples/import/SimpleParser.php:
-           fix INT FLOAT in this
-		if ( ($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT) )
-		
-
+- examples: *See TODO in each subfolder. 
 
