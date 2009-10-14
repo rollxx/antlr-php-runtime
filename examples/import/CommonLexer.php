@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 19, 2009 17:38:18 CommonLexer.g 2009-04-19 17:50:12
+// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 CommonLexer.g 2009-04-20 00:26:12
 
 /** Not really useful by itself; a library of rules to import into
  *  another grammar.
@@ -100,8 +100,8 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$ID;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:10:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* ) */
-            /* CommonLexer.g:10:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* */
+            // CommonLexer.g:10:4: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* ) 
+            // CommonLexer.g:10:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* 
             {
             if ( ($this->input->LA(1)>=65 && $this->input->LA(1)<=90)||$this->input->LA(1)==95||($this->input->LA(1)>=97 && $this->input->LA(1)<=122) ) {
                 $this->input->consume();
@@ -112,7 +112,7 @@ class CommonLexer extends AntlrLexer {
                 $this->recover($mse);
                 throw $mse;}
 
-            /* CommonLexer.g:10:30: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* */
+            // CommonLexer.g:10:30: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* 
             //loop1:
             do {
                 $alt1=2;
@@ -125,7 +125,7 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt1) {
             	case 1 :
-            	    /* CommonLexer.g: */
+            	    // CommonLexer.g: 
             	    {
             	    if ( ($this->input->LA(1)>=48 && $this->input->LA(1)<=57)||($this->input->LA(1)>=65 && $this->input->LA(1)<=90)||$this->input->LA(1)==95||($this->input->LA(1)>=97 && $this->input->LA(1)<=122) ) {
             	        $this->input->consume();
@@ -162,10 +162,10 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$INT;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:12:5: ( ( '0' .. '9' )+ ) */
-            /* CommonLexer.g:12:7: ( '0' .. '9' )+ */
+            // CommonLexer.g:12:5: ( ( '0' .. '9' )+ ) 
+            // CommonLexer.g:12:7: ( '0' .. '9' )+ 
             {
-            /* CommonLexer.g:12:7: ( '0' .. '9' )+ */
+            // CommonLexer.g:12:7: ( '0' .. '9' )+ 
             $cnt2=0;
             //loop2:
             do {
@@ -179,7 +179,7 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt2) {
             	case 1 :
-            	    /* CommonLexer.g:12:7: '0' .. '9' */
+            	    // CommonLexer.g:12:7: '0' .. '9' 
             	    {
             	    $this->matchRange(48,57); 
 
@@ -212,7 +212,7 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$FLOAT;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:14:6: ( INT '.' ( INT )? | '.' INT ) */
+            // CommonLexer.g:14:6: ( INT '.' ( INT )? | '.' INT ) 
             $alt4=2;
             $LA4_0 = $this->input->LA(1);
 
@@ -229,11 +229,11 @@ class CommonLexer extends AntlrLexer {
             }
             switch ($alt4) {
                 case 1 :
-                    /* CommonLexer.g:14:8: INT '.' ( INT )? */
+                    // CommonLexer.g:14:8: INT '.' ( INT )? 
                     {
                     $this->mINT(); 
                     $this->matchChar(46); 
-                    /* CommonLexer.g:14:16: ( INT )? */
+                    // CommonLexer.g:14:16: ( INT )? 
                     $alt3=2;
                     $LA3_0 = $this->input->LA(1);
 
@@ -242,7 +242,7 @@ class CommonLexer extends AntlrLexer {
                     }
                     switch ($alt3) {
                         case 1 :
-                            /* CommonLexer.g:14:16: INT */
+                            // CommonLexer.g:14:16: INT 
                             {
                             $this->mINT(); 
 
@@ -255,7 +255,7 @@ class CommonLexer extends AntlrLexer {
                     }
                     break;
                 case 2 :
-                    /* CommonLexer.g:15:4: '.' INT */
+                    // CommonLexer.g:15:4: '.' INT 
                     {
                     $this->matchChar(46); 
                     $this->mINT(); 
@@ -278,11 +278,11 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$CHAR;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:18:5: ( '\\'' ( ESC | ~ ( '\\'' | '\\\\' ) ) '\\'' ) */
-            /* CommonLexer.g:18:9: '\\'' ( ESC | ~ ( '\\'' | '\\\\' ) ) '\\'' */
+            // CommonLexer.g:18:5: ( '\\'' ( ESC | ~ ( '\\'' | '\\\\' ) ) '\\'' ) 
+            // CommonLexer.g:18:9: '\\'' ( ESC | ~ ( '\\'' | '\\\\' ) ) '\\'' 
             {
             $this->matchChar(39); 
-            /* CommonLexer.g:18:14: ( ESC | ~ ( '\\'' | '\\\\' ) ) */
+            // CommonLexer.g:18:14: ( ESC | ~ ( '\\'' | '\\\\' ) ) 
             $alt5=2;
             $LA5_0 = $this->input->LA(1);
 
@@ -299,14 +299,14 @@ class CommonLexer extends AntlrLexer {
             }
             switch ($alt5) {
                 case 1 :
-                    /* CommonLexer.g:18:16: ESC */
+                    // CommonLexer.g:18:16: ESC 
                     {
                     $this->mESC(); 
 
                     }
                     break;
                 case 2 :
-                    /* CommonLexer.g:18:22: ~ ( '\\'' | '\\\\' ) */
+                    // CommonLexer.g:18:22: ~ ( '\\'' | '\\\\' ) 
                     {
                     if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=38)||($this->input->LA(1)>=40 && $this->input->LA(1)<=91)||($this->input->LA(1)>=93 && $this->input->LA(1)<=65535) ) {
                         $this->input->consume();
@@ -341,11 +341,11 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$STRING;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:22:5: ( '\"' ( ESC | ~ ( '\\\\' | '\"' ) )* '\"' ) */
-            /* CommonLexer.g:22:8: '\"' ( ESC | ~ ( '\\\\' | '\"' ) )* '\"' */
+            // CommonLexer.g:22:5: ( '\"' ( ESC | ~ ( '\\\\' | '\"' ) )* '\"' ) 
+            // CommonLexer.g:22:8: '\"' ( ESC | ~ ( '\\\\' | '\"' ) )* '\"' 
             {
             $this->matchChar(34); 
-            /* CommonLexer.g:22:12: ( ESC | ~ ( '\\\\' | '\"' ) )* */
+            // CommonLexer.g:22:12: ( ESC | ~ ( '\\\\' | '\"' ) )* 
             //loop6:
             do {
                 $alt6=3;
@@ -361,14 +361,14 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt6) {
             	case 1 :
-            	    /* CommonLexer.g:22:14: ESC */
+            	    // CommonLexer.g:22:14: ESC 
             	    {
             	    $this->mESC(); 
 
             	    }
             	    break;
             	case 2 :
-            	    /* CommonLexer.g:22:20: ~ ( '\\\\' | '\"' ) */
+            	    // CommonLexer.g:22:20: ~ ( '\\\\' | '\"' ) 
             	    {
             	    if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=33)||($this->input->LA(1)>=35 && $this->input->LA(1)<=91)||($this->input->LA(1)>=93 && $this->input->LA(1)<=65535) ) {
             	        $this->input->consume();
@@ -404,8 +404,8 @@ class CommonLexer extends AntlrLexer {
     // $ANTLR start "ESC"
     function mESC(){
         try {
-            /* CommonLexer.g:26:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) ) */
-            /* CommonLexer.g:26:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) */
+            // CommonLexer.g:26:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) ) 
+            // CommonLexer.g:26:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) 
             {
             $this->matchChar(92); 
             if ( $this->input->LA(1)==34||$this->input->LA(1)==39||$this->input->LA(1)==92||$this->input->LA(1)==98||$this->input->LA(1)==102||$this->input->LA(1)==110||$this->input->LA(1)==114||$this->input->LA(1)==116 ) {
@@ -432,12 +432,12 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$COMMENT;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:30:5: ( '/*' ( options {greedy=false; } : . )* '*/' ) */
-            /* CommonLexer.g:30:9: '/*' ( options {greedy=false; } : . )* '*/' */
+            // CommonLexer.g:30:5: ( '/*' ( options {greedy=false; } : . )* '*/' ) 
+            // CommonLexer.g:30:9: '/*' ( options {greedy=false; } : . )* '*/' 
             {
             $this->matchString("/*"); 
 
-            /* CommonLexer.g:30:14: ( options {greedy=false; } : . )* */
+            // CommonLexer.g:30:14: ( options {greedy=false; } : . )* 
             //loop7:
             do {
                 $alt7=2;
@@ -462,7 +462,7 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt7) {
             	case 1 :
-            	    /* CommonLexer.g:30:42: . */
+            	    // CommonLexer.g:30:42: . 
             	    {
             	    $this->matchAny(); 
 
@@ -494,12 +494,12 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$LINE_COMMENT;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:34:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' ) */
-            /* CommonLexer.g:34:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' */
+            // CommonLexer.g:34:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' ) 
+            // CommonLexer.g:34:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' 
             {
             $this->matchString("//"); 
 
-            /* CommonLexer.g:34:12: (~ ( '\\n' | '\\r' ) )* */
+            // CommonLexer.g:34:12: (~ ( '\\n' | '\\r' ) )* 
             //loop8:
             do {
                 $alt8=2;
@@ -512,7 +512,7 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt8) {
             	case 1 :
-            	    /* CommonLexer.g:34:12: ~ ( '\\n' | '\\r' ) */
+            	    // CommonLexer.g:34:12: ~ ( '\\n' | '\\r' ) 
             	    {
             	    if ( ($this->input->LA(1)>=0 && $this->input->LA(1)<=9)||($this->input->LA(1)>=11 && $this->input->LA(1)<=12)||($this->input->LA(1)>=14 && $this->input->LA(1)<=65535) ) {
             	        $this->input->consume();
@@ -532,7 +532,7 @@ class CommonLexer extends AntlrLexer {
                 }
             } while (true);
 
-            /* CommonLexer.g:34:26: ( '\\r' )? */
+            // CommonLexer.g:34:26: ( '\\r' )? 
             $alt9=2;
             $LA9_0 = $this->input->LA(1);
 
@@ -541,7 +541,7 @@ class CommonLexer extends AntlrLexer {
             }
             switch ($alt9) {
                 case 1 :
-                    /* CommonLexer.g:34:26: '\\r' */
+                    // CommonLexer.g:34:26: '\\r' 
                     {
                     $this->matchChar(13); 
 
@@ -569,10 +569,10 @@ class CommonLexer extends AntlrLexer {
         try {
             $_type = CommonLexer::$WS;
             $_channel = CommonLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* CommonLexer.g:37:4: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ ) */
-            /* CommonLexer.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ */
+            // CommonLexer.g:37:4: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ ) 
+            // CommonLexer.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ 
             {
-            /* CommonLexer.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ */
+            // CommonLexer.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' )+ 
             $cnt10=0;
             //loop10:
             do {
@@ -586,7 +586,7 @@ class CommonLexer extends AntlrLexer {
 
                 switch ($alt10) {
             	case 1 :
-            	    /* CommonLexer.g: */
+            	    // CommonLexer.g: 
             	    {
             	    if ( ($this->input->LA(1)>=9 && $this->input->LA(1)<=10)||$this->input->LA(1)==13||$this->input->LA(1)==32 ) {
             	        $this->input->consume();
@@ -624,61 +624,61 @@ class CommonLexer extends AntlrLexer {
     // $ANTLR end "WS"
 
     function mTokens(){
-        /* CommonLexer.g:1:8: ( ID | INT | FLOAT | CHAR | STRING | COMMENT | LINE_COMMENT | WS ) */
+        // CommonLexer.g:1:8: ( ID | INT | FLOAT | CHAR | STRING | COMMENT | LINE_COMMENT | WS ) 
         $alt11=8;
         $alt11 = $this->dfa11->predict($this->input);
         switch ($alt11) {
             case 1 :
-                /* CommonLexer.g:1:10: ID */
+                // CommonLexer.g:1:10: ID 
                 {
                 $this->mID(); 
 
                 }
                 break;
             case 2 :
-                /* CommonLexer.g:1:13: INT */
+                // CommonLexer.g:1:13: INT 
                 {
                 $this->mINT(); 
 
                 }
                 break;
             case 3 :
-                /* CommonLexer.g:1:17: FLOAT */
+                // CommonLexer.g:1:17: FLOAT 
                 {
                 $this->mFLOAT(); 
 
                 }
                 break;
             case 4 :
-                /* CommonLexer.g:1:23: CHAR */
+                // CommonLexer.g:1:23: CHAR 
                 {
                 $this->mCHAR(); 
 
                 }
                 break;
             case 5 :
-                /* CommonLexer.g:1:28: STRING */
+                // CommonLexer.g:1:28: STRING 
                 {
                 $this->mSTRING(); 
 
                 }
                 break;
             case 6 :
-                /* CommonLexer.g:1:35: COMMENT */
+                // CommonLexer.g:1:35: COMMENT 
                 {
                 $this->mCOMMENT(); 
 
                 }
                 break;
             case 7 :
-                /* CommonLexer.g:1:43: LINE_COMMENT */
+                // CommonLexer.g:1:43: LINE_COMMENT 
                 {
                 $this->mLINE_COMMENT(); 
 
                 }
                 break;
             case 8 :
-                /* CommonLexer.g:1:56: WS */
+                // CommonLexer.g:1:56: WS 
                 {
                 $this->mWS(); 
 

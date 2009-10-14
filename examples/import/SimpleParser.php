@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 19, 2009 17:38:18 Simple.g 2009-04-19 17:50:13
+// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 Simple.g 2009-04-20 00:26:13
 
 class SimpleParser extends AntlrParser {
     public static $tokenNames = array(
@@ -55,19 +55,19 @@ class SimpleParser extends AntlrParser {
 
 
     // $ANTLR start "file"
-    /* Simple.g:10:1: file : 'program' ID ';' ( decl )+ ; */
+    // Simple.g:10:1: file : 'program' ID ';' ( decl )+ ; 
     public function file(){
         $ID1=null;
 
         try {
-            /* Simple.g:10:6: ( 'program' ID ';' ( decl )+ ) */
-            /* Simple.g:10:8: 'program' ID ';' ( decl )+ */
+            // Simple.g:10:6: ( 'program' ID ';' ( decl )+ ) 
+            // Simple.g:10:8: 'program' ID ';' ( decl )+ 
             {
             $this->match($this->input,$this->getToken('13'),self::$FOLLOW_13_in_file32); 
             $ID1=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_file34); 
             $this->match($this->input,$this->getToken('14'),self::$FOLLOW_14_in_file36); 
               System.out.println("found program "+($ID1!=null?$ID1->getText():null));
-            /* Simple.g:11:8: ( decl )+ */
+            // Simple.g:11:8: ( decl )+ 
             $cnt1=0;
             //loop1:
             do {
@@ -81,7 +81,7 @@ class SimpleParser extends AntlrParser {
 
                 switch ($alt1) {
             	case 1 :
-            	    /* Simple.g:11:8: decl */
+            	    // Simple.g:11:8: decl 
             	    {
             	    $this->pushFollow(self::$FOLLOW_decl_in_file47);
             	    $this->decl();
@@ -119,17 +119,17 @@ class SimpleParser extends AntlrParser {
 
 
     // $ANTLR start "decl"
-    /* Simple.g:14:1: decl : 'var' ID ( '=' expr )? ';' ; */
+    // Simple.g:14:1: decl : 'var' ID ( '=' expr )? ';' ; 
     public function decl(){
         $ID2=null;
 
         try {
-            /* Simple.g:14:6: ( 'var' ID ( '=' expr )? ';' ) */
-            /* Simple.g:14:8: 'var' ID ( '=' expr )? ';' */
+            // Simple.g:14:6: ( 'var' ID ( '=' expr )? ';' ) 
+            // Simple.g:14:8: 'var' ID ( '=' expr )? ';' 
             {
             $this->match($this->input,$this->getToken('15'),self::$FOLLOW_15_in_decl62); 
             $ID2=$this->match($this->input,$this->getToken('ID'),self::$FOLLOW_ID_in_decl64); 
-            /* Simple.g:14:17: ( '=' expr )? */
+            // Simple.g:14:17: ( '=' expr )? 
             $alt2=2;
             $LA2_0 = $this->input->LA(1);
 
@@ -138,7 +138,7 @@ class SimpleParser extends AntlrParser {
             }
             switch ($alt2) {
                 case 1 :
-                    /* Simple.g:14:18: '=' expr */
+                    // Simple.g:14:18: '=' expr 
                     {
                     $this->match($this->input,$this->getToken('16'),self::$FOLLOW_16_in_decl67); 
                     $this->pushFollow(self::$FOLLOW_expr_in_decl69);
@@ -172,11 +172,11 @@ class SimpleParser extends AntlrParser {
 
 
     // $ANTLR start "expr"
-    /* Simple.g:18:1: expr : ( INT | FLOAT ); */
+    // Simple.g:18:1: expr : ( INT | FLOAT ); 
     public function expr(){
         try {
-            /* Simple.g:18:6: ( INT | FLOAT ) */
-            /* Simple.g: */
+            // Simple.g:18:6: ( INT | FLOAT ) 
+            // Simple.g: 
             {
             if ( ($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT) ) {
                 $this->input->consume();

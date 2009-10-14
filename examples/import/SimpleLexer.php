@@ -1,5 +1,5 @@
 <?php
-// $ANTLR 3.1.3 ??? 19, 2009 17:38:18 Simple__.g 2009-04-19 17:50:13
+// $ANTLR 3.1.3 ??? 20, 2009 24:07:22 Simple__.g 2009-04-20 00:26:14
 
       
 function SimpleLexer_DFA1_static(){
@@ -111,8 +111,8 @@ class SimpleLexer extends AntlrLexer {
         try {
             $_type = SimpleLexer::$T__13;
             $_channel = SimpleLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* Simple__.g:7:7: ( 'program' ) */
-            /* Simple__.g:7:9: 'program' */
+            // Simple__.g:7:7: ( 'program' ) 
+            // Simple__.g:7:9: 'program' 
             {
             $this->matchString("program"); 
 
@@ -133,8 +133,8 @@ class SimpleLexer extends AntlrLexer {
         try {
             $_type = SimpleLexer::$T__14;
             $_channel = SimpleLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* Simple__.g:8:7: ( ';' ) */
-            /* Simple__.g:8:9: ';' */
+            // Simple__.g:8:7: ( ';' ) 
+            // Simple__.g:8:9: ';' 
             {
             $this->matchChar(59); 
 
@@ -154,8 +154,8 @@ class SimpleLexer extends AntlrLexer {
         try {
             $_type = SimpleLexer::$T__15;
             $_channel = SimpleLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* Simple__.g:9:7: ( 'var' ) */
-            /* Simple__.g:9:9: 'var' */
+            // Simple__.g:9:7: ( 'var' ) 
+            // Simple__.g:9:9: 'var' 
             {
             $this->matchString("var"); 
 
@@ -176,8 +176,8 @@ class SimpleLexer extends AntlrLexer {
         try {
             $_type = SimpleLexer::$T__16;
             $_channel = SimpleLexer::$DEFAULT_TOKEN_CHANNEL;
-            /* Simple__.g:10:7: ( '=' ) */
-            /* Simple__.g:10:9: '=' */
+            // Simple__.g:10:7: ( '=' ) 
+            // Simple__.g:10:9: '=' 
             {
             $this->matchChar(61); 
 
@@ -193,40 +193,40 @@ class SimpleLexer extends AntlrLexer {
     // $ANTLR end "T__16"
 
     function mTokens(){
-        /* Simple__.g:1:8: ( T__13 | T__14 | T__15 | T__16 | CommonLexer. Tokens ) */
+        // Simple__.g:1:8: ( T__13 | T__14 | T__15 | T__16 | CommonLexer. Tokens ) 
         $alt1=5;
         $alt1 = $this->dfa1->predict($this->input);
         switch ($alt1) {
             case 1 :
-                /* Simple__.g:1:10: T__13 */
+                // Simple__.g:1:10: T__13 
                 {
                 $this->mT__13(); 
 
                 }
                 break;
             case 2 :
-                /* Simple__.g:1:16: T__14 */
+                // Simple__.g:1:16: T__14 
                 {
                 $this->mT__14(); 
 
                 }
                 break;
             case 3 :
-                /* Simple__.g:1:22: T__15 */
+                // Simple__.g:1:22: T__15 
                 {
                 $this->mT__15(); 
 
                 }
                 break;
             case 4 :
-                /* Simple__.g:1:28: T__16 */
+                // Simple__.g:1:28: T__16 
                 {
                 $this->mT__16(); 
 
                 }
                 break;
             case 5 :
-                /* Simple__.g:1:34: CommonLexer. Tokens */
+                // Simple__.g:1:34: CommonLexer. Tokens 
                 {
                 gCommonLexer.$this->mTokens(); 
 
