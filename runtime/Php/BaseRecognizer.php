@@ -1,7 +1,7 @@
 <?php
 
 abstract class BaseRecognizer{
-	
+
 	public static $MEMO_RULE_FAILED = -2;
 	public static $MEMO_RULE_UNKNOWN = -1;
 	public static $INITIAL_FOLLOW_STACK_SIZE = 100;
@@ -11,14 +11,16 @@ abstract class BaseRecognizer{
 	public static $HIDDEN; //= TokenConst::$HIDDEN_CHANNEL;
 
 	public static $NEXT_TOKEN_RULE_NAME = "nextToken";
-	
+
+	public $state;
+
 	public function __construct($state = null) {
 		if ( $state==null ) {
 			$state = new RecognizerSharedState();
 		}
 		$this->state = $state;
 	}
-	
+
 	/** reset the parser's state; subclasses must rewinds the input stream */
 	public function reset() {
 		// wack everything related to error recovery
@@ -88,9 +90,9 @@ abstract class BaseRecognizer{
 		if ( $follow->member(TokenConst::$EOR_TOKEN_TYPE) ) {
 			$viableTokensFollowingThisRule = $this->computeContextSensitiveRuleFOLLOW();
 			$follow = $follow->union($viableTokensFollowingThisRule);
-            if ( $this->state->_fsp>=0 ) { // remove EOR if we're not the start symbol
-                $follow->remove(TokenConst::$EOR_TOKEN_TYPE);
-            }
+			if ( $this->state->_fsp>=0 ) { // remove EOR if we're not the start symbol
+				$follow->remove(TokenConst::$EOR_TOKEN_TYPE);
+			}
 		}
 		// if current token is consistent with what could come after set
 		// then we know we're missing a token; error recovery is free to
@@ -153,14 +155,14 @@ abstract class BaseRecognizer{
 
 		$this->displayRecognitionError($this->getTokenNames(), $e);
 	}
-	
-	
+
+
 	public function displayRecognitionError($tokenNames, $e){
 		$hdr = $this->getErrorHeader($e);
 		$msg = $this->getErrorMessage($e, $tokenNames);
 		$this->emitErrorMessage($hdr." ".$msg);
 	}
-	
+
 	/** What error message should be generated for the various
 	 *  exception types?
 	 *
@@ -243,7 +245,7 @@ abstract class BaseRecognizer{
 			$eee = $e;
 			// for development, can add "(decision="+eee.decisionNumber+")"
 			$msg = "required (...)+ loop did not match anything at input ".
-				getTokenErrorDisplay($e->token);
+			getTokenErrorDisplay($e->token);
 		}
 		else if ( $e instanceof MismatchedSetException ) {
 			$mse = $e;
@@ -258,7 +260,7 @@ abstract class BaseRecognizer{
 		else if ( $e instanceof FailedPredicateException ) {
 			$fpe = $e;
 			$msg = "rule ".$fpe->ruleName." failed predicate: {".
-				$fpe->predicateText."}?";
+			$fpe->predicateText."}?";
 		}
 		return $msg;
 	}
@@ -278,8 +280,8 @@ abstract class BaseRecognizer{
 	public function getErrorHeader($e) {
 		return "line ".$e->line.":".$e->charPositionInLine;
 	}
-	
-	
+
+
 	/** How should a token be displayed in an error message? The default
 	 *  is to display just the text, but during development you might
 	 *  want to have a lot of information spit out.  Override in that case
@@ -496,8 +498,8 @@ abstract class BaseRecognizer{
 		for ($i=$top; $i>=0; $i--) {
 			$localFollowSet = $this->state->following[$i];
 			/*
-			System.out.println("local follow depth "+i+"="+
-							   localFollowSet.toString(getTokenNames())+")");
+			 System.out.println("local follow depth "+i+"="+
+			 localFollowSet.toString(getTokenNames())+")");
 			 */
 			$followSet->unionInPlace($localFollowSet);
 			if ( $this->exact ) {
@@ -554,9 +556,9 @@ abstract class BaseRecognizer{
 		if ( $this->mismatchIsUnwantedToken($input, $ttype) ) {
 			$e = new UnwantedTokenException($ttype, $input);
 			/*
-			System.err.println("recoverFromMismatchedToken deleting "+
-							   ((TokenStream)input).LT(1)+
-							   " since "+((TokenStream)input).LT(2)+" is what we want");
+			 System.err.println("recoverFromMismatchedToken deleting "+
+			 ((TokenStream)input).LT(1)+
+			 " since "+((TokenStream)input).LT(2)+" is what we want");
 			 */
 			$this->beginResync();
 			$input.consume(); // simply delete extra token
@@ -597,7 +599,7 @@ abstract class BaseRecognizer{
 	 *  for input stream type or change the IntStream interface, I use
 	 *  a simple method to ask the recognizer to tell me what the current
 	 *  input symbol is.
-	 * 
+	 *
 	 *  This is ignored for lexers.
 	 */
 	protected function getCurrentInputSymbol($input) { return null; }
@@ -652,7 +654,7 @@ abstract class BaseRecognizer{
 		// 			System.arraycopy(state.following, 0, f, 0, state.following.length-1);
 		// 			$this->state->following = f;
 		// 		}
- 		$this->state->following[++$this->state->_fsp] = $fset;
+		$this->state->following[++$this->state->_fsp] = $fset;
 	}
 
 	/** Return List<String> of the rules in your parser instance
@@ -672,7 +674,7 @@ abstract class BaseRecognizer{
 	 *  TODO: move to a utility class or something; weird having lexer call this
 	 */
 	public static function getRuleInvocationStack($e=null,
-											  $recognizerClassName=null)
+	$recognizerClassName=null)
 	{
 		if($e==null){
 			$e = new Exception();
@@ -748,7 +750,7 @@ abstract class BaseRecognizer{
 			$this->state->ruleMemo[$ruleIndex] = array();
 		}
 		$stopIndexI =
-			$this->state->ruleMemo[$ruleIndex][$ruleStartIndex];
+		$this->state->ruleMemo[$ruleIndex][$ruleStartIndex];
 		if ( $stopIndexI==null ) {
 			return self::$MEMO_RULE_UNKNOWN;
 		}
@@ -839,9 +841,9 @@ abstract class BaseRecognizer{
 			return $this->$name;
 		}
 	}
-	
+
 	public function getTokenName($tokenId){
-		
+
 	}
 
 }
