@@ -1,6 +1,6 @@
 v0.0.1 // Yauhen Yakimovich 05.05.09
 
-+ CONGRATS! examples/import parser and lexer works perfectly, starting another examples
++ CONGRATS! examples/import parser and lexer works perfectly, starting another example
 
 - fixed Php.stg:
 	added $this->getToken('<lower>') to isolatedLookaheadRangeTest template
