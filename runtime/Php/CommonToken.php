@@ -14,6 +14,8 @@
 			$this->input = $input;
 			$this->charPositionInLine=$start;		
 			$this->type = $type;
+			$this->index = 0;
+			$this->text = null;
 			
 			if (is_int($channel)) {
 				$this->channel = $channel;
@@ -24,6 +26,7 @@
 			
 			$this->start = $start;
 			$this->stop = $stop;
+			$this->line = 0;
 		}
 		
 		public static function forType($type){

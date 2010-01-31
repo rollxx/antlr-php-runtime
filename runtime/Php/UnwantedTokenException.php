@@ -26,15 +26,28 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-require_once('RuleReturnScope.php');
 
-/** This is identical to the ParserRuleReturnScope except that
- *  the start property is a tree nodes not Token object
- *  when you are parsing trees.  To be generic the tree node types
- *  have to be Object.
- */
-class TreeRuleReturnScope extends RuleReturnScope {
-	/** First node or root node of tree matched for this rule. */
-	public $start;
-	public function getStart() { return $this->start; }	
+/** An extra token while parsing a TokenStream */
+class UnwantedTokenException extends MismatchedTokenException {
+
+	public function __construct($expecting, $input) {
+		parent::__construct($expecting, $input);
+	}
+
+	public function getUnexpectedToken() {
+		return $this->token;
+	}
+
+	public function __toString() {
+		$exp = ", expected "+$this->expecting;
+		if ( $this->expecting==TokenConst::$INVALID_TOKEN_TYPE ) {
+			$exp = "";
+		}
+		if ( $this->token==null ) {
+			return "UnwantedTokenException(found="+$exp+")";
+		}
+		return "UnwantedTokenException(found="+$this->token->getText()+$exp+")";
+	}
 }
+
+?>

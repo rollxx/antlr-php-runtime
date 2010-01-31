@@ -26,15 +26,19 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-require_once('RuleReturnScope.php');
 
-/** This is identical to the ParserRuleReturnScope except that
- *  the start property is a tree nodes not Token object
- *  when you are parsing trees.  To be generic the tree node types
- *  have to be Object.
- */
-class TreeRuleReturnScope extends RuleReturnScope {
-	/** First node or root node of tree matched for this rule. */
-	public $start;
-	public function getStart() { return $this->start; }	
+/** Rules can return start/stop info as well as possible trees and templates */
+class RuleReturnScope {
+	/** Return the start token or tree */
+	public function getStart() { return null; }
+	/** Return the stop token or tree */
+	public function getStop() { return null; }
+	/** Has a value potentially if output=AST; */
+	public function getTree() { return null; }
+	/** Has a value potentially if output=template; Don't use StringTemplate
+	 *  type as it then causes a dependency with ST lib.
+	 */
+	public function getTemplate() { return null; }
 }
+
+?>
