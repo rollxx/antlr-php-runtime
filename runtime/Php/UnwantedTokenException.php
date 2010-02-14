@@ -39,14 +39,14 @@ class UnwantedTokenException extends MismatchedTokenException {
 	}
 
 	public function __toString() {
-		$exp = ", expected "+$this->expecting;
+		$exp = ", expected ".$this->expecting;
 		if ( $this->expecting==TokenConst::$INVALID_TOKEN_TYPE ) {
 			$exp = "";
 		}
 		if ( $this->token==null ) {
-			return "UnwantedTokenException(found="+$exp+")";
+			return "UnwantedTokenException(found=".$exp.")";
 		}
-		return "UnwantedTokenException(found="+$this->token->getText()+$exp+")";
+		return "UnwantedTokenException(found=".$this->token->getText().$exp.")";
 	}
 }
 
