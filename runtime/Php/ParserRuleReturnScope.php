@@ -26,15 +26,29 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-require_once('RuleReturnScope.php');
 
-/** This is identical to the ParserRuleReturnScope except that
- *  the start property is a tree nodes not Token object
- *  when you are parsing trees.  To be generic the tree node types
- *  have to be Object.
+/** Rules that return more than a single value must return an object
+ *  containing all the values.  Besides the properties defined in
+ *  RuleLabelScope.predefinedRulePropertiesScope there may be user-defined
+ *  return values.  This class simply defines the minimum properties that
+ *  are always defined and methods to access the others that might be
+ *  available depending on output option such as template and tree.
+ *
+ *  Note text is not an actual property of the return value, it is computed
+ *  from start and stop using the input stream's toString() method.  I
+ *  could add a ctor to this so that we can pass in and store the input
+ *  stream, but I'm not sure we want to do that.  It would seem to be undefined
+ *  to get the .text property anyway if the rule matches tokens from multiple
+ *  input streams.
+ *
+ *  I do not use getters for fields of objects that are used simply to
+ *  group values such as this aggregate.  The getters/setters are there to
+ *  satisfy the superclass interface.
  */
-class TreeRuleReturnScope extends RuleReturnScope {
-	/** First node or root node of tree matched for this rule. */
-	public $start;
-	public function getStart() { return $this->start; }	
+require_once 'RuleReturnScope.php';
+
+class ParserRuleReturnScope extends RuleReturnScope {
+	public $start, $stop;
+	public function getStart() { return start; }
+	public function getStop() { return stop; }
 }

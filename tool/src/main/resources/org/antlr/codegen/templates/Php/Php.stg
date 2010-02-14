@@ -120,10 +120,10 @@ filteringNextToken() ::= <<
 public Token nextToken() {
     while (true) {
         if ( input.LA(1)==CharStream.EOF ) {
-            return Token.EOF_TOKEN;
+            return TokenConst::$EOF_TOKEN;
         }
         state.token = null;
-	state.channel = Token.DEFAULT_CHANNEL;
+	state.channel = TokenConst::$DEFAULT_CHANNEL;
         state.tokenStartCharIndex = input.index();
         state.tokenStartCharPositionInLine = input.getCharPositionInLine();
         state.tokenStartLine = input.getLine();
@@ -147,8 +147,8 @@ public Token nextToken() {
         }
         catch (RecognitionException re) {
             // shouldn't happen in backtracking mode, but...
-            reportError(re);
-            recover(re);
+            $this->reportError(re);
+            $this->recover(re);
         }
     }
 }
@@ -315,7 +315,7 @@ lexerSynpred(name) ::= <<
 
 ruleMemoization(name) ::= <<
 <if(memoize)>
-if ( state.backtracking>0 && alreadyParsedRule(input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
+if ( $this->state->backtracking>0 && alreadyParsedRule(input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
 <endif>
 >>
 
@@ -392,7 +392,7 @@ catch (<e.decl>) {
 
 ruleDeclarations() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-$retval = new <returnType()>();
+$retval = $this-><returnType()>();
 $retval->start = $this->input->LT(1);<\n>
 <else>
 <ruleDescriptor.returnScope.attributes:{ a |
@@ -400,7 +400,7 @@ $<a.name> = <if(a.initValue)><a.initValue><else>null<endif>;
 }>
 <endif>
 <if(memoize)>
-int <ruleDescriptor.name>_StartIndex = input.index();
+$<ruleDescriptor.name>_StartIndex = $this->input->index();
 <endif>
 >>
 
@@ -445,7 +445,7 @@ ruleReturnValue() ::= <<
 <if(ruleDescriptor.hasSingleReturnValue)>
 $<ruleDescriptor.singleValueReturnName>
 <else>
-retval
+$retval
 <endif>
 <endif>
 <endif>
@@ -454,7 +454,7 @@ retval
 ruleCleanUp() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 <if(!TREE_PARSER)>
-retval.stop = input.LT(-1);<\n>
+$retval->stop = $this->input->LT(-1);<\n>
 <endif>
 <endif>
 >>
@@ -714,7 +714,7 @@ else {
     $this->recover($mse);
     throw $mse;
 <else>
-    throw mse;
+    throw $mse;
     <! use following code to make it recover inline; remove throw mse;
     recoverFromMismatchedSet(input,mse,FOLLOW_set_in_<ruleName><elementIndex>);
     !>
@@ -734,7 +734,7 @@ lexerStringRef(string,label) ::= <<
 <if(label)>
 int <label>Start = getCharIndex();
 match(<string>); <checkRuleBacktrackFailure()>
-<label> = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, <label>Start, getCharIndex()-1);
+<label> = new CommonToken(input, TokenConst::$INVALID_TOKEN_TYPE, TokenConst::$DEFAULT_CHANNEL, <label>Start, getCharIndex()-1);
 <else>
 $this->matchString(<string>); <checkRuleBacktrackFailure()><\n>
 <endif>
@@ -794,7 +794,7 @@ lexerRuleRef(rule,label,args,elementIndex,scope) ::= <<
 <if(label)>
 $<label>Start<elementIndex> = $this->getCharIndex();
 $this-><if(scope)><scope:delegateName()>-><endif>m<rule.name>(<args; separator=", ">); <checkRuleBacktrackFailure()>
-$<label> = new CommonToken($this->input, $Token_INVALID_TOKEN_TYPE, $Token_DEFAULT_CHANNEL, $<label>Start<elementIndex>, $this->getCharIndex()-1);
+$<label> = new CommonToken($this->input, TokenConst::$INVALID_TOKEN_TYPE, TokenConst::$DEFAULT_CHANNEL, $<label>Start<elementIndex>, $this->getCharIndex()-1);
 <else>
 $this-><if(scope)><scope:delegateName()>-><endif>m<rule.name>(<args; separator=", ">); <checkRuleBacktrackFailure()>
 <endif>
@@ -811,7 +811,7 @@ lexerMatchEOF(label,elementIndex) ::= <<
 <if(label)>
 int <label>Start<elementIndex> = getCharIndex();
 match(EOF); <checkRuleBacktrackFailure()>
-<labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
+<labelType> <label> = new CommonToken(input, EOF, TokenConst::$DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
 <else>
 match(EOF); <checkRuleBacktrackFailure()>
 <endif>
@@ -823,15 +823,15 @@ tree(root, actionsAfterRoot, children, nullableChildList,
 <root:element()>
 <actionsAfterRoot:element()>
 <if(nullableChildList)>
-if ( input.LA(1)==Token.DOWN ) {
-    match(input, Token.DOWN, null); <checkRuleBacktrackFailure()>
+if ( input.LA(1)==TokenConst::$DOWN ) {
+    match(input, TokenConst::$DOWN, null); <checkRuleBacktrackFailure()>
     <children:element()>
-    match(input, Token.UP, null); <checkRuleBacktrackFailure()>
+    match(input, TokenConst::$UP, null); <checkRuleBacktrackFailure()>
 }
 <else>
-match(input, Token.DOWN, null); <checkRuleBacktrackFailure()>
+match(input, TokenConst::$DOWN, null); <checkRuleBacktrackFailure()>
 <children:element()>
-match(input, Token.UP, null); <checkRuleBacktrackFailure()>
+match(input, TokenConst::$UP, null); <checkRuleBacktrackFailure()>
 <endif>
 >>
 
@@ -970,34 +970,27 @@ $alt<decisionNumber> = $this->dfa<decisionNumber>->predict($this->input);
  */
 cyclicDFA(dfa) ::= <<
 function <grammar.recognizerName>_DFA<dfa.decisionNumber>_static(){
-    $eotS =
-        "<dfa.javaCompressedEOT; wrap="\".\n    \"">";
-    $eofS =
-        "<dfa.javaCompressedEOF; wrap="\".\n    \"">";
-    $minS =
-        "<dfa.javaCompressedMin; wrap="\".\n    \"">";
-    $maxS =
-        "<dfa.javaCompressedMax; wrap="\".\n    \"">";
-    $acceptS =
-        "<dfa.javaCompressedAccept; wrap="\".\n    \"">";
-    $specialS =
-        "<dfa.javaCompressedSpecial; wrap="\".\n    \"">}>";
-    $transitionS = array(
-        <dfa.javaCompressedTransition:{s|"<s; wrap="\".\n\"">"}; separator=",\n">
-    );
+    $eot = array(<dfa.javaCompressedEOT; separator=", ", wrap="\n    ">);
+    $eof = array(<dfa.javaCompressedEOF; separator=", ", wrap="\n    ">);
+    $min = array(<dfa.javaCompressedMin; separator=", ", wrap="\n    ">);
+    $max = array(<dfa.javaCompressedMax; separator=", ", wrap="\n    ">);
+    $accept = array(<dfa.javaCompressedAccept; separator=", ", wrap="\n    ">);
+    $special = array(<dfa.javaCompressedSpecial; separator=", ", wrap="\n    ">);
+    $transitionS = array(<dfa.javaCompressedTransition:{s|array(<s; separator=", ", wrap="\n    ">)}; separator=", ", wrap="\n    ">);
+
     $arr = array();
-    $arr['eot'] = DFA::unpackEncodedString($eotS);
-    $arr['eof'] = DFA::unpackEncodedString($eofS);
-    $arr['min'] = DFA::unpackEncodedString($minS);
-    $arr['max'] = DFA::unpackEncodedString($maxS);
-    $arr['accept'] = DFA::unpackEncodedString($acceptS);
-    $arr['special'] = DFA::unpackEncodedString($specialS);
+    $arr['eot'] = DFA::unpackRLE($eot);
+    $arr['eof'] = DFA::unpackRLE($eof);
+    $arr['min'] = DFA::unpackRLE($min, true);
+    $arr['max'] = DFA::unpackRLE($max, true);
+    $arr['accept'] = DFA::unpackRLE($accept);
+    $arr['special'] = DFA::unpackRLE($special);
 
 
     $numStates = sizeof($transitionS);
     $arr['transition'] = array();
     for ($i=0; $i\<$numStates; $i++) {
-        $arr['transition'][$i] = DFA::unpackEncodedString($transitionS[$i]);
+        $arr['transition'][$i] = DFA::unpackRLE($transitionS[$i]);
     }
     return $arr;
 }
@@ -1134,8 +1127,7 @@ protected Stack <scope.name>_stack = new Stack();<\n>
 returnStructName() ::= "<it.name>_return"
 
 returnType() ::= <<
-<if(ruleDescriptor.hasMultipleReturnValues)>
-<ruleDescriptor.grammar.recognizerName>.<ruleDescriptor:returnStructName()>
+<if(ruleDescriptor.hasMultipleReturnValues)><ruleDescriptor:returnStructName()>
 <else>
 <if(ruleDescriptor.hasSingleReturnValue)>
 <ruleDescriptor.singleValueReturnType>
@@ -1182,10 +1174,12 @@ $<label.label.text> = null;<\n>
  */
 returnScope(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-public static class <ruleDescriptor:returnStructName()> extends <if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope {
-    <scope.attributes:{public <it.decl>;}; separator="\n">
-    <@ruleReturnMembers()>
-};
+public static function <ruleDescriptor:returnStructName()>() {
+	require_once '<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope.php';
+/*    <scope.attributes:{public <it.decl>;}; separator="\n">
+    <@ruleReturnMembers()>*/
+	return new <if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope();
+}
 <endif>
 >>
 
@@ -1278,7 +1272,7 @@ ruleLabelPropertyRef_text(scope,attr) ::= <<
   $this->input->getTreeAdaptor()->getTokenStartIndex($<scope>->start),
   $this->input->getTreeAdaptor()->getTokenStopIndex($<scope>->start))):null)
 <else>
-($<scope>!=null?$input->toString($<scope>->start,$<scope>->stop):null)
+($<scope>!=null?$this->input->toStringBetweenTokens($<scope>->start,$<scope>->stop):null)
 <endif>
 >>
 
@@ -1303,16 +1297,16 @@ lexerRuleLabelPropertyRef_int(scope,attr) ::=
     "($<scope>!=null?Integer.valueOf($<scope>.getText()):0)"
 
 // Somebody may ref $template or $tree or $stop within a rule:
-rulePropertyRef_start(scope,attr) ::= "((<labelType>)retval.start)"
-rulePropertyRef_stop(scope,attr) ::= "((<labelType>)retval.stop)"
-rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType>)retval.tree)"
+rulePropertyRef_start(scope,attr) ::= "((<labelType>)$retval->start)"
+rulePropertyRef_stop(scope,attr) ::= "((<labelType>)$retval->stop)"
+rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType>)$retval->tree)"
 rulePropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
 input.getTokenStream().toString(
   input.getTreeAdaptor().getTokenStartIndex(retval.start),
   input.getTreeAdaptor().getTokenStopIndex(retval.start))
 <else>
-input.toString(retval.start,input.LT(-1))
+$this->input->toStringBetweenTokens($retval->start,$this->input->LT(-1))
 <endif>
 >>
 rulePropertyRef_st(scope,attr) ::= "retval.st"

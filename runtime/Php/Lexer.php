@@ -136,11 +136,11 @@ abstract class AntlrLexer extends BaseRecognizer{
 			}
 			$i++;
 			$this->input->consume();
-			$state->failed = false;
+			$this->state->failed = false;
 		}
 	}
 	
-	public function matchAny() {
+	public function matchAny($x=null) {
 		$this->input->consume();
 	}
 	
@@ -272,7 +272,7 @@ abstract class AntlrLexer extends BaseRecognizer{
 		if ($c==TokenConst::$EOF){
 			$s = "<EOF>";
 		}
-		return "'"+$s+"'";
+		return "'".$s."'";
 	}
 	
 	/** Lexers can normally match any char in it's vocabulary after matching
@@ -280,17 +280,17 @@ abstract class AntlrLexer extends BaseRecognizer{
 	 *  it all works out.  You can instead use the rule invocation stack
 	 *  to do sophisticated error recovery if you are in a fragment rule.
 	 */
-	public function recover($re) {
+	public function recover($re, $input=null) {
 		$this->input->consume();
 	}
 	
 	
-	public function traceIn($ruleName, $ruleIndex)  {
+	public function traceIn($ruleName, $ruleIndex, $inputSymbol=null)  {
 		$inputSymbol = $this->input->LT(1)." line=".$this->getLine().":".$this->getCharPositionInLine();
 		parent::traceIn($ruleName, $ruleIndex, $inputSymbol);
 	}
 
-	public function traceOut($ruleName, $ruleIndex)  {
+	public function traceOut($ruleName, $ruleIndex, $inputSymbol=null)  {
 		$inputSymbol = $this->input->LT(1)." line=".$this->getLine().":".$this->getCharPositionInLine();
 		parent::traceOut($ruleName, $ruleIndex, $inputSymbol);
 	}
