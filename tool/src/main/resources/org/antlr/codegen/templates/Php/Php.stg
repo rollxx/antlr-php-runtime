@@ -734,7 +734,7 @@ lexerStringRef(string,label) ::= <<
 <if(label)>
 int <label>Start = getCharIndex();
 match(<string>); <checkRuleBacktrackFailure()>
-<label> = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, <label>Start, getCharIndex()-1);
+<labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
 <else>
 $this->matchString(<string>); <checkRuleBacktrackFailure()><\n>
 <endif>
