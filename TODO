@@ -1,0 +1,11 @@
+
+- Implement trivial examples to test Lexer and Parser, then switch to AST 
+generation, and then to full sync with ANTLRv3
+
+- Add implementation of StringTemplate class in PHP 
+  (StringTemplateGroup for cminus example)
+
+- Add codegeneration files AST.stg ASTParser.stg ASTTreeParser.stg ST.stg AST.stg ASTTreeParser.stg
+
+- examples: *See TODO in each subfolder. 
+
