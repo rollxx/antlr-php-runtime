@@ -392,7 +392,7 @@ catch (<e.decl>) {
 
 ruleDeclarations() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-$retval = $this-><returnType()>();
+$retval = new <returnType()>();
 $retval->start = $this->input->LT(1);<\n>
 <else>
 <ruleDescriptor.returnScope.attributes:{ a |
@@ -734,7 +734,7 @@ lexerStringRef(string,label) ::= <<
 <if(label)>
 int <label>Start = getCharIndex();
 match(<string>); <checkRuleBacktrackFailure()>
-<label> = new CommonToken(input, TokenConst::$INVALID_TOKEN_TYPE, TokenConst::$DEFAULT_CHANNEL, <label>Start, getCharIndex()-1);
+<labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
 <else>
 $this->matchString(<string>); <checkRuleBacktrackFailure()><\n>
 <endif>
@@ -811,7 +811,7 @@ lexerMatchEOF(label,elementIndex) ::= <<
 <if(label)>
 int <label>Start<elementIndex> = getCharIndex();
 match(EOF); <checkRuleBacktrackFailure()>
-<labelType> <label> = new CommonToken(input, EOF, TokenConst::$DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
+<labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
 <else>
 match(EOF); <checkRuleBacktrackFailure()>
 <endif>
