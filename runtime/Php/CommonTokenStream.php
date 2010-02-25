@@ -366,7 +366,7 @@ class CommonTokenStream implements TokenStream {
 
 	public function toStringBetweenTokens($start, $stop) {
 		if ( $start!=null && $stop!=null ) {
-			return toString($this->start->getTokenIndex(), $this->stop->getTokenIndex());
+			return $this->toStringBetween($start->getTokenIndex(), $stop->getTokenIndex());
 		}
 		return null;
 	}

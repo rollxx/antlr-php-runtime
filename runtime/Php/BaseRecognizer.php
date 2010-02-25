@@ -53,7 +53,7 @@ abstract class BaseRecognizer{
 	 */
 	public function match($input, $ttype, $follow)
 	{
-		//System.out.println("match "+((TokenStream)input).LT(1));
+//		echo ("match ".$input->LT(1)."\n");
 		$matchedSymbol = $this->getCurrentInputSymbol($input);
 		if ( $input->LA(1)==$ttype ) {
 			$input->consume();
@@ -245,7 +245,7 @@ abstract class BaseRecognizer{
 			$eee = $e;
 			// for development, can add "(decision="+eee.decisionNumber+")"
 			$msg = "required (...)+ loop did not match anything at input ".
-			getTokenErrorDisplay($e->token);
+			$this->getTokenErrorDisplay($e->token);
 		}
 		else if ( $e instanceof MismatchedSetException ) {
 			$mse = $e;
@@ -292,18 +292,18 @@ abstract class BaseRecognizer{
 	 */
 	public function getTokenErrorDisplay($t) {
 		$s = $t->getText();
-		if ( $s==null ) {
+		if ( $s===null ) {
 			if ( $t->getType()==TokenConst::$EOF ) {
 				$s = "<EOF>";
 			}
 			else {
-				$s = "<"+$t->getType()+">";
+				$s = "<".$t->getType().">";
 			}
 		}
 		$s = str_replace("\n", '\n', $s);
 		$s = str_replace("\r",'\r', $s);
 		$s = str_replace("\t",'\t', $s);
-		return "'"+$s+"'";
+		return "'".$s."'";
 	}
 
 	/** Override this method to change where error messages go */
@@ -502,7 +502,7 @@ abstract class BaseRecognizer{
 			 localFollowSet.toString(getTokenNames())+")");
 			 */
 			$followSet->unionInPlace($localFollowSet);
-			if ( $this->exact ) {
+			if ( $exact ) {
 				// can we see end of rule?
 				if ( $localFollowSet->member(TokenConst::$EOR_TOKEN_TYPE) ) {
 					// Only leave EOR in set if at top (start rule); this lets
@@ -561,7 +561,7 @@ abstract class BaseRecognizer{
 			 " since "+((TokenStream)input).LT(2)+" is what we want");
 			 */
 			$this->beginResync();
-			$input.consume(); // simply delete extra token
+			$input->consume(); // simply delete extra token
 			$this->endResync();
 			$this->reportError($e);  // report after consuming so AW sees the token in the exception
 			// we want to return the token we're actually matching
@@ -829,7 +829,7 @@ abstract class BaseRecognizer{
 			echo(" failed=".$this->state->failed);
 		}
 		if ( $this->state->backtracking>0 ) {
-			echo(" backtracking="+$this->state->backtracking);
+			echo(" backtracking=".$this->state->backtracking);
 		}
 		echo "\n";
 	}
@@ -841,7 +841,7 @@ abstract class BaseRecognizer{
 	 * 	($this->input->LA(1)>=INT && $this->input->LA(1)<=FLOAT)
 	 */
 	public function getToken($name){
-		if(preg_match("/\d+/", $name)){
+		if(preg_match("/^\d+/", $name)){
 			return (integer)$name;
 		}else{
 			return $this->$name;
