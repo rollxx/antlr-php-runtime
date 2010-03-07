@@ -195,7 +195,7 @@ class DFA {
         for ($i=0,$len=sizeof($encodedArray); $i<$len; $i+=2) {
             $n = $encodedArray[$i];
             // limit number of transitions, or parsing time >3 sec?!
-            if($n>500) continue;
+            if($n>600) continue;
             $v = $encodedArray[$i+1];
 			$intValue = $unsigned||(($v&0x8000)==0)?$v:-(0x10000 - $v);
             for ($j=1; $j<=$n; $j++) {
