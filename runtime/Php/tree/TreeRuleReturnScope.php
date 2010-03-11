@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<?php
+>>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 /*
  [The "BSD licence"]
  Copyright (c) 2005-2008 Terence Parr
@@ -25,17 +29,28 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+<<<<<<< HEAD
 package org.antlr.runtime.tree;
 
 import org.antlr.runtime.RuleReturnScope;
+=======
+require_once('RuleReturnScope.php');
+>>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 
 /** This is identical to the ParserRuleReturnScope except that
  *  the start property is a tree nodes not Token object
  *  when you are parsing trees.  To be generic the tree node types
  *  have to be Object.
  */
+<<<<<<< HEAD
 public class TreeRuleReturnScope extends RuleReturnScope {
 	/** First node or root node of tree matched for this rule. */
 	public Object start;
 	public Object getStart() { return start; }	
+=======
+class TreeRuleReturnScope extends RuleReturnScope {
+	/** First node or root node of tree matched for this rule. */
+	public $start;
+	public function getStart() { return $this->start; }	
+>>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 }

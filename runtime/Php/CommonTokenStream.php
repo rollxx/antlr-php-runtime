@@ -316,7 +316,11 @@ class CommonTokenStream implements TokenStream {
 
 	public function rewind($marker = null) {
 		if($marker===null){
+<<<<<<< HEAD
 			$marker = $this->lastMarker;
+=======
+			$marker = $this->lastmarker;
+>>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 		}
 		$this->seek($marker);
 	}
