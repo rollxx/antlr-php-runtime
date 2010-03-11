@@ -120,17 +120,10 @@ filteringNextToken() ::= <<
 public Token nextToken() {
     while (true) {
         if ( input.LA(1)==CharStream.EOF ) {
-<<<<<<< HEAD
             return Token.EOF_TOKEN;
         }
         state.token = null;
 	state.channel = Token.DEFAULT_CHANNEL;
-=======
-            return TokenConst::$EOF_TOKEN;
-        }
-        state.token = null;
-	state.channel = TokenConst::$DEFAULT_CHANNEL;
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
         state.tokenStartCharIndex = input.index();
         state.tokenStartCharPositionInLine = input.getCharPositionInLine();
         state.tokenStartLine = input.getLine();
@@ -154,13 +147,8 @@ public Token nextToken() {
         }
         catch (RecognitionException re) {
             // shouldn't happen in backtracking mode, but...
-<<<<<<< HEAD
             reportError(re);
             recover(re);
-=======
-            $this->reportError(re);
-            $this->recover(re);
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
         }
     }
 }
@@ -178,11 +166,7 @@ return false;
 }
 >>
 
-<<<<<<< HEAD
 actionGate() ::= "$this->state->backtracking==0"
-=======
-actionGate() ::= "state.backtracking==0"
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 
 filteringActionGate() ::= "state.backtracking==1"
 
@@ -200,19 +184,11 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 
     // delegates
     <grammar.delegates:
-<<<<<<< HEAD
          {g|public $<g:delegateName()>;}; separator="\n">
     // delegators
     <grammar.delegators:
          {g|public $<g:delegateName()>;}; separator="\n">
     <last(grammar.delegators):{g|public $gParent;}>
-=======
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
-    // delegators
-    <grammar.delegators:
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
-    <last(grammar.delegators):{g|public <g.recognizerName> gParent;}>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 
     <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScope(scope=it)><endif>}>
     
@@ -222,7 +198,6 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
     
     <@members>
     <! WARNING. bug in ST: this is cut-n-paste into Dbg.stg !>
-<<<<<<< HEAD
     public function __construct($input, $state<grammar.delegators:{g|, $<g:delegateName()>}> = null) {
         if($state==null){
             $state = new RecognizerSharedState();
@@ -233,18 +208,6 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
          {g|$this-><g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, $<p:delegateName()>}>, $this);}; separator="\n">         
         <grammar.indirectDelegates:{g | $this-><g:delegateName()> = $this-><g.delegator:delegateName()>-><g:delegateName()>;}; separator="\n">
         <last(grammar.delegators):{g|$this->gParent = $this-><g:delegateName()>;}>
-=======
-    public function __construct($input, $state<grammar.delegators:{g|, <g.recognizerName> <g:delegateName()>}> = null) {
-        if($state==null){
-            $state = new RecognizerSharedState();
-        }
-        parent::__construct($input, $state<grammar.delegators:{g|, <g:delegateName()>}>);
-        <parserCtorBody()>
-        <grammar.directDelegates:
-         {g|<g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, <p:delegateName()>}>, $this);}; separator="\n">         
-        <grammar.indirectDelegates:{g | <g:delegateName()> = <g.delegator:delegateName()>.<g:delegateName()>;}; separator="\n">
-        <last(grammar.delegators):{g|gParent = <g:delegateName()>;}>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
         
         <cyclicDFAs:{dfa | $this->dfa<dfa.decisionNumber> = new <grammar.recognizerName>_DFA<dfa.decisionNumber>($this);}; separator="\n">
         
@@ -262,11 +225,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
    appear to be defined in this recognizer. !>
     // Delegated rules
 <grammar.delegatedRules:{ruleDescriptor|
-<<<<<<< HEAD
     public function <ruleDescriptor.name>(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) \{ <if(ruleDescriptor.hasReturnValue)>return <endif>$this-><ruleDescriptor.grammar:delegateName()>-><ruleDescriptor.name>(<ruleDescriptor.parameterScope.attributes:{a|<a.name>}; separator=", ">); \}}; separator="\n">
-=======
-    public <returnType()> <ruleDescriptor.name>(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) throws RecognitionException \{ <if(ruleDescriptor.hasReturnValue)>return <endif><ruleDescriptor.grammar:delegateName()>.<ruleDescriptor.name>(<ruleDescriptor.parameterScope.attributes:{a|<a.name>}; separator=", ">); \}}; separator="\n">
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 
     <synpreds:{p | <synpred(p)>}>
 
@@ -287,11 +246,7 @@ this.state.ruleMemo = new HashMap[<length(grammar.allImportedRules)>+1];<\n> <! 
 <endif>
 <endif>
 <grammar.delegators:
-<<<<<<< HEAD
  {g|$this-><g:delegateName()> = $<g:delegateName()>;}; separator="\n">
-=======
- {g|this.<g:delegateName()> = <g:delegateName()>;}; separator="\n">
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 >>
 
 parser(grammar, name, scopes, tokens, tokenNames, rules, numRules, bitsets, ASTLabelType="Object", superClass="AntlrParser", labelType="Token", members={<actions.parser.members>}) ::= <<
@@ -319,11 +274,7 @@ treeParser(grammar, name, scopes, tokens, tokenNames, globalAction, rules,
 synpredRule(ruleName, ruleDescriptor, block, description, nakedBlock) ::=
 <<
 // $ANTLR start <ruleName>
-<<<<<<< HEAD
 public function <ruleName>_fragment(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) {   
-=======
-public final void <ruleName>_fragment(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) throws RecognitionException {   
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <if(trace)>
     traceIn("<ruleName>_fragment", <ruleDescriptor.index>);
     try {
@@ -340,7 +291,6 @@ public final void <ruleName>_fragment(<ruleDescriptor.parameterScope:parameterSc
 >>
 
 synpred(name) ::= <<
-<<<<<<< HEAD
 public function <name>() {
     $this->state->backtracking++;
     <@start()>
@@ -356,23 +306,6 @@ public function <name>() {
     $this->state->backtracking--;
     $this->state->failed=false;
     return $success;
-=======
-public final boolean <name>() {
-    state.backtracking++;
-    <@start()>
-    int start = input.mark();
-    try {
-        <name>_fragment(); // can never throw exception
-    } catch (RecognitionException re) {
-        System.err.println("impossible: "+re);
-    }
-    boolean success = !state.failed;
-    input.rewind(start);
-    <@stop()>
-    state.backtracking--;
-    state.failed=false;
-    return success;
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 }<\n>
 >>
 
@@ -382,30 +315,18 @@ lexerSynpred(name) ::= <<
 
 ruleMemoization(name) ::= <<
 <if(memoize)>
-<<<<<<< HEAD
 if ( state.backtracking>0 && alreadyParsedRule(input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
-=======
-if ( $this->state->backtracking>0 && alreadyParsedRule(input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <endif>
 >>
 
 /** How to test for failure and return from rule */
 checkRuleBacktrackFailure() ::= <<
-<<<<<<< HEAD
 <if(backtracking)>if ($this->state->failed) return <ruleReturnValue()>;<endif>
-=======
-<if(backtracking)>if (state.failed) return <ruleReturnValue()>;<endif>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 >>
 
 /** This rule has failed, exit indicating failure during backtrack */
 ruleBacktrackFailure() ::= <<
-<<<<<<< HEAD
 <if(backtracking)>if ($this->state->backtracking>0) {$this->state->failed=true; return <ruleReturnValue()>;}<endif>
-=======
-<if(backtracking)>if (state.backtracking>0) {state.failed=true; return <ruleReturnValue()>;}<endif>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 >>
 
 /** How to generate code for a rule.  This includes any return type
@@ -471,11 +392,7 @@ catch (<e.decl>) {
 
 ruleDeclarations() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-<<<<<<< HEAD
 $retval = new <returnType()>();
-=======
-$retval = $this-><returnType()>();
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 $retval->start = $this->input->LT(1);<\n>
 <else>
 <ruleDescriptor.returnScope.attributes:{ a |
@@ -787,11 +704,7 @@ if ( <s> ) {
 <if(!LEXER)>
     $this->state->errorRecovery=false;
 <endif>
-<<<<<<< HEAD
     <if(backtracking)>$this->state->failed=false;<endif>
-=======
-    <if(backtracking)>state.failed=false;<endif>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 }
 else {
     <ruleBacktrackFailure()>
@@ -821,11 +734,7 @@ lexerStringRef(string,label) ::= <<
 <if(label)>
 int <label>Start = getCharIndex();
 match(<string>); <checkRuleBacktrackFailure()>
-<<<<<<< HEAD
 <labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
-=======
-<label> = new CommonToken(input, TokenConst::$INVALID_TOKEN_TYPE, TokenConst::$DEFAULT_CHANNEL, <label>Start, getCharIndex()-1);
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <else>
 $this->matchString(<string>); <checkRuleBacktrackFailure()><\n>
 <endif>
@@ -864,11 +773,7 @@ wildcardCharListLabel(label, elementIndex) ::= <<
  */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
 $this->pushFollow(self::$FOLLOW_<rule.name>_in_<ruleName><elementIndex>);
-<<<<<<< HEAD
 <if(label)>$<label>=<endif>$this-><if(scope)><scope:delegateName()>-><endif><rule.name>(<args; separator=", ">);<\n>
-=======
-<if(label)>$<label>=<endif>$this-><if(scope)><scope:delegateName()>.<endif><rule.name>(<args; separator=", ">);<\n>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 $this->state->_fsp--;
 <checkRuleBacktrackFailure()>
 >>
@@ -906,11 +811,7 @@ lexerMatchEOF(label,elementIndex) ::= <<
 <if(label)>
 int <label>Start<elementIndex> = getCharIndex();
 match(EOF); <checkRuleBacktrackFailure()>
-<<<<<<< HEAD
 <labelType> <label> = new CommonToken(input, EOF, Token.DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
-=======
-<labelType> <label> = new CommonToken(input, EOF, TokenConst::$DEFAULT_CHANNEL, <label>Start<elementIndex>, getCharIndex()-1);
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <else>
 match(EOF); <checkRuleBacktrackFailure()>
 <endif>
@@ -922,7 +823,6 @@ tree(root, actionsAfterRoot, children, nullableChildList,
 <root:element()>
 <actionsAfterRoot:element()>
 <if(nullableChildList)>
-<<<<<<< HEAD
 if ( input.LA(1)==Token.DOWN ) {
     match(input, Token.DOWN, null); <checkRuleBacktrackFailure()>
     <children:element()>
@@ -932,17 +832,6 @@ if ( input.LA(1)==Token.DOWN ) {
 match(input, Token.DOWN, null); <checkRuleBacktrackFailure()>
 <children:element()>
 match(input, Token.UP, null); <checkRuleBacktrackFailure()>
-=======
-if ( input.LA(1)==TokenConst::$DOWN ) {
-    match(input, TokenConst::$DOWN, null); <checkRuleBacktrackFailure()>
-    <children:element()>
-    match(input, TokenConst::$UP, null); <checkRuleBacktrackFailure()>
-}
-<else>
-match(input, TokenConst::$DOWN, null); <checkRuleBacktrackFailure()>
-<children:element()>
-match(input, TokenConst::$UP, null); <checkRuleBacktrackFailure()>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <endif>
 >>
 
@@ -1144,11 +1033,7 @@ class <grammar.recognizerName>_DFA<dfa.decisionNumber> extends DFA {
             <state>}; separator="\n">
         }
 <if(backtracking)>
-<<<<<<< HEAD
         if ($this->recognizer->state->backtracking>0) {$this->recognizer->state->failed=true; return -1;}<\n>
-=======
-        if ($this->state->backtracking>0) {$this->state->failed=true; return -1;}<\n>
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 <endif>
         $nvae =
             new NoViableAltException($this->getDescription(), <dfa.decisionNumber>, $_s, $input);
@@ -1202,11 +1087,7 @@ notPredicate(pred) ::= "!(<evalPredicate(...)>)"
 
 evalPredicate(pred,description) ::= "(<pred>)"
 
-<<<<<<< HEAD
 evalSynPredicate(pred,description) ::= "$this->recognizer-><pred>()"
-=======
-evalSynPredicate(pred,description) ::= "<pred>()"
->>>>>>> 1e5d6e9aaa9b19db80e52a0bc2b19caf90a7b539
 
 lookaheadTest(atom,k,atomAsInt) ::= "$LA<decisionNumber>_<stateNumber>==$this->getToken('<atom>')"
 
