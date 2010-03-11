@@ -184,11 +184,11 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 
     // delegates
     <grammar.delegates:
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
+         {g|public $<g:delegateName()>;}; separator="\n">
     // delegators
     <grammar.delegators:
-         {g|public <g.recognizerName> <g:delegateName()>;}; separator="\n">
-    <last(grammar.delegators):{g|public <g.recognizerName> gParent;}>
+         {g|public $<g:delegateName()>;}; separator="\n">
+    <last(grammar.delegators):{g|public $gParent;}>
 
     <scopes:{<if(it.isDynamicGlobalScope)><globalAttributeScope(scope=it)><endif>}>
     
@@ -198,16 +198,16 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
     
     <@members>
     <! WARNING. bug in ST: this is cut-n-paste into Dbg.stg !>
-    public function __construct($input, $state<grammar.delegators:{g|, <g.recognizerName> <g:delegateName()>}> = null) {
+    public function __construct($input, $state<grammar.delegators:{g|, $<g:delegateName()>}> = null) {
         if($state==null){
             $state = new RecognizerSharedState();
         }
-        parent::__construct($input, $state<grammar.delegators:{g|, <g:delegateName()>}>);
+        parent::__construct($input, $state<grammar.delegators:{g|, $<g:delegateName()>}>);
         <parserCtorBody()>
         <grammar.directDelegates:
-         {g|<g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, <p:delegateName()>}>, $this);}; separator="\n">         
-        <grammar.indirectDelegates:{g | <g:delegateName()> = <g.delegator:delegateName()>.<g:delegateName()>;}; separator="\n">
-        <last(grammar.delegators):{g|gParent = <g:delegateName()>;}>
+         {g|$this-><g:delegateName()> = new <g.recognizerName>($input, $state<trunc(g.delegators):{p|, $<p:delegateName()>}>, $this);}; separator="\n">         
+        <grammar.indirectDelegates:{g | $this-><g:delegateName()> = $this-><g.delegator:delegateName()>-><g:delegateName()>;}; separator="\n">
+        <last(grammar.delegators):{g|$this->gParent = $this-><g:delegateName()>;}>
         
         <cyclicDFAs:{dfa | $this->dfa<dfa.decisionNumber> = new <grammar.recognizerName>_DFA<dfa.decisionNumber>($this);}; separator="\n">
         
@@ -225,7 +225,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
    appear to be defined in this recognizer. !>
     // Delegated rules
 <grammar.delegatedRules:{ruleDescriptor|
-    public <returnType()> <ruleDescriptor.name>(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) throws RecognitionException \{ <if(ruleDescriptor.hasReturnValue)>return <endif><ruleDescriptor.grammar:delegateName()>.<ruleDescriptor.name>(<ruleDescriptor.parameterScope.attributes:{a|<a.name>}; separator=", ">); \}}; separator="\n">
+    public function <ruleDescriptor.name>(<ruleDescriptor.parameterScope:parameterScope(scope=it)>) \{ <if(ruleDescriptor.hasReturnValue)>return <endif>$this-><ruleDescriptor.grammar:delegateName()>-><ruleDescriptor.name>(<ruleDescriptor.parameterScope.attributes:{a|<a.name>}; separator=", ">); \}}; separator="\n">
 
     <synpreds:{p | <synpred(p)>}>
 
@@ -246,7 +246,7 @@ this.state.ruleMemo = new HashMap[<length(grammar.allImportedRules)>+1];<\n> <! 
 <endif>
 <endif>
 <grammar.delegators:
- {g|this.<g:delegateName()> = <g:delegateName()>;}; separator="\n">
+ {g|$this-><g:delegateName()> = $<g:delegateName()>;}; separator="\n">
 >>
 
 parser(grammar, name, scopes, tokens, tokenNames, rules, numRules, bitsets, ASTLabelType="Object", superClass="AntlrParser", labelType="Token", members={<actions.parser.members>}) ::= <<
@@ -773,7 +773,7 @@ wildcardCharListLabel(label, elementIndex) ::= <<
  */
 ruleRef(rule,label,elementIndex,args,scope) ::= <<
 $this->pushFollow(self::$FOLLOW_<rule.name>_in_<ruleName><elementIndex>);
-<if(label)>$<label>=<endif>$this-><if(scope)><scope:delegateName()>.<endif><rule.name>(<args; separator=", ">);<\n>
+<if(label)>$<label>=<endif>$this-><if(scope)><scope:delegateName()>-><endif><rule.name>(<args; separator=", ">);<\n>
 $this->state->_fsp--;
 <checkRuleBacktrackFailure()>
 >>
