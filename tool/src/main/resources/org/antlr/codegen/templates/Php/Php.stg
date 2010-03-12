@@ -841,7 +841,7 @@ match(input, Token.UP, null); <checkRuleBacktrackFailure()>
 validateSemanticPredicate(pred,description) ::= <<
 if ( !(<evalPredicate(...)>) ) {
     <ruleBacktrackFailure()>
-    throw new FailedPredicateException($this->input, "<ruleName>", "<description>");
+    throw new FailedPredicateException($this->input, "<ruleName>", '<description>');
 }
 >>
 
