@@ -85,7 +85,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
         parent::__construct($input,$state);
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
-        $this->state->ruleMemo = new HashMap[<numRules>+1];<\n> <! index from 1..n !>
+        $this->state->ruleMemo = array();<\n> <! index from 1..n !>
 <endif>
 <endif>
         <grammar.directDelegates:
@@ -242,7 +242,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 parserCtorBody() ::= <<
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
-this.state.ruleMemo = new HashMap[<length(grammar.allImportedRules)>+1];<\n> <! index from 1..n !>
+$this->state->ruleMemo = array();<\n> <! index from 1..n !>
 <endif>
 <endif>
 <grammar.delegators:
@@ -315,7 +315,7 @@ lexerSynpred(name) ::= <<
 
 ruleMemoization(name) ::= <<
 <if(memoize)>
-if ( state.backtracking>0 && alreadyParsedRule(input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
+if ( $this->state->backtracking>0 && $this->alreadyParsedRule($this->input, <ruleDescriptor.index>) ) { return <ruleReturnValue()>; }
 <endif>
 >>
 
@@ -462,7 +462,7 @@ $retval->stop = $this->input->LT(-1);<\n>
 memoize() ::= <<
 <if(memoize)>
 <if(backtracking)>
-if ( state.backtracking>0 ) { memoize(input, <ruleDescriptor.index>, <ruleDescriptor.name>_StartIndex); }
+if ( $this->state->backtracking>0 ) { $this->memoize($input, <ruleDescriptor.index>, $<ruleDescriptor.name>_StartIndex); }
 <endif>
 <endif>
 >>
