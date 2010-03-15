@@ -392,7 +392,7 @@ catch (<e.decl>) {
 
 ruleDeclarations() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
-$retval = new <returnType()>();
+$retval = $this-><returnType()>();
 $retval->start = $this->input->LT(1);<\n>
 <else>
 <ruleDescriptor.returnScope.attributes:{ a |
@@ -1176,9 +1176,10 @@ returnScope(scope) ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 public static function <ruleDescriptor:returnStructName()>() {
 	require_once '<if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope.php';
-/*    <scope.attributes:{public <it.decl>;}; separator="\n">
-    <@ruleReturnMembers()>*/
-	return new <if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope();
+    $retval = new <if(TREE_PARSER)>Tree<else>Parser<endif>RuleReturnScope();
+	<scope.attributes:{$retval-><it.name>=null;}; separator="\n">
+    <@ruleReturnMembers()>
+	return $retval;
 }
 <endif>
 >>
