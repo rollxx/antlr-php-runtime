@@ -394,6 +394,10 @@ ruleDeclarations() ::= <<
 <if(ruleDescriptor.hasMultipleReturnValues)>
 $retval = $this-><returnType()>();
 $retval->start = $this->input->LT(1);<\n>
+<! rollxx could not find a better way to link between attributes !>
+<ruleDescriptor.returnScope.attributes:{ a |
+$retval-><a.name> = &$<a.name>;
+}>
 <else>
 <ruleDescriptor.returnScope.attributes:{ a |
 $<a.name> = <if(a.initValue)><a.initValue><else>null<endif>;
