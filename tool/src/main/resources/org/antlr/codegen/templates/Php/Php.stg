@@ -86,6 +86,7 @@ class <grammar.recognizerName> extends <@superClassName><superClass><@end> {
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
         $this->state->ruleMemo = array();<\n> <! index from 1..n !>
+		
 <endif>
 <endif>
         <grammar.directDelegates:
@@ -243,6 +244,9 @@ parserCtorBody() ::= <<
 <if(memoize)>
 <if(grammar.grammarIsRoot)>
 $this->state->ruleMemo = array();<\n> <! index from 1..n !>
+for ($i=0; $i \< <numRules>; $i++) { 
+    $this->state->ruleMemo[$i] = array();				
+}
 <endif>
 <endif>
 <grammar.delegators:
@@ -466,7 +470,7 @@ $retval->stop = $this->input->LT(-1);<\n>
 memoize() ::= <<
 <if(memoize)>
 <if(backtracking)>
-if ( $this->state->backtracking>0 ) { $this->memoize($input, <ruleDescriptor.index>, $<ruleDescriptor.name>_StartIndex); }
+if ( $this->state->backtracking>0 ) { $this->memoize($this->input, <ruleDescriptor.index>, $<ruleDescriptor.name>_StartIndex); }
 <endif>
 <endif>
 >>
@@ -1091,7 +1095,7 @@ notPredicate(pred) ::= "!(<evalPredicate(...)>)"
 
 evalPredicate(pred,description) ::= "(<pred>)"
 
-evalSynPredicate(pred,description) ::= "$this->recognizer-><pred>()"
+evalSynPredicate(pred,description) ::= "$this-><pred>()"
 
 lookaheadTest(atom,k,atomAsInt) ::= "$LA<decisionNumber>_<stateNumber>==$this->getToken('<atom>')"
 
